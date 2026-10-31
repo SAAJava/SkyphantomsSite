@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172223">
+  <title>SKYPHANTOMS · Место пилота</title>
+  <link rel="stylesheet" href="cockpit.css">
+  <script src="cockpit.js" defer></script>
+  <script src="dice.js" defer></script>
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="index.html" aria-label="SKYPHANTOMS — место пилота">
+      <svg viewBox="0 0 52 28" aria-hidden="true"><path d="M2 8h16l8-6 8 6h16L36 18h-7v8h-6v-8h-7Z" fill="currentColor"/><path d="m5 13 12 9h4v-5m26-4-12 9h-4v-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <span>SKYPHANTOMS<small>ПРОТОКОЛ ПИЛОТА</small></span>
+    </a>
+    <div class="toolbar-center"><span class="live-dot"></span> МЕСТО ПИЛОТА <span class="toolbar-divider">/</span> БОРТ 052</div>
+    <div class="toolbar-actions">
+      <button class="book-button" id="book-button" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 0v15m-2 1a2 2 0 0 1 2-1h14M9 7h6m-6 4h6"/></svg><span>Лётная книжка</span></button>
+      <button class="book-button dice-open-button" id="dice-button" type="button" aria-label="Открыть броски D10" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 6-2 10-7 4-7-4L3 8Zm0 0v7m-9-1 9 1 9-1M5 18l7-9 7 9m-7-9v13"/></svg><span>Броски D10</span></button>
+      <button class="icon-button fullscreen-button" id="fullscreen-button" type="button" aria-label="На весь экран" title="На весь экран"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div class="cockpit-column">
+    <div class="scene-frame">
+      <svg id="cockpit" viewBox="0 0 1600 1000" role="group" aria-label="Кабина SKYPHANTOMS. Восемь приборов управляют характеристиками персонажа. Ручка управления меняет вид за стеклом.">
+        <defs>
+          <linearGradient id="sky" gradientUnits="userSpaceOnUse" x1="0" y1="-120" x2="0" y2="190"><stop stop-color="#455f76"/><stop offset=".45" stop-color="#7e9ba8"/><stop offset=".75" stop-color="#b7c8c6"/><stop offset="1" stop-color="#d5cfb9"/></linearGradient>
+          <linearGradient id="sea" gradientUnits="userSpaceOnUse" x1="0" y1="175" x2="0" y2="1200"><stop stop-color="#879f9f"/><stop offset=".2" stop-color="#547980"/><stop offset=".6" stop-color="#2c525f"/><stop offset="1" stop-color="#203c4c"/></linearGradient>
+          <linearGradient id="horizon-haze" x2="0" y2="1"><stop stop-color="#d2cfb9" stop-opacity=".42"/><stop offset=".35" stop-color="#adbdb6" stop-opacity=".14"/><stop offset="1" stop-color="#adbdb6" stop-opacity="0"/></linearGradient>
+          <linearGradient id="cloud-light" x2=".2" y2="1"><stop stop-color="#eee8d6" stop-opacity=".8"/><stop offset=".45" stop-color="#d7dcce" stop-opacity=".7"/><stop offset="1" stop-color="#8fa5aa" stop-opacity=".08"/></linearGradient>
+          <linearGradient id="island-rock" x2=".45" y2="1"><stop stop-color="#7f8270"/><stop offset=".45" stop-color="#4c5d50"/><stop offset="1" stop-color="#2f4641"/></linearGradient>
+          <linearGradient id="aircraft-wing" x2=".2" y2="1"><stop stop-color="#a3a18a"/><stop offset=".25" stop-color="#858976"/><stop offset=".78" stop-color="#606b5c"/><stop offset="1" stop-color="#3d4b44"/></linearGradient>
+          <linearGradient id="aircraft-fuselage" x2=".1" y2="1"><stop stop-color="#c2bf9f"/><stop offset=".28" stop-color="#929984"/><stop offset=".68" stop-color="#596b60"/><stop offset="1" stop-color="#2d4240"/></linearGradient>
+          <radialGradient id="aircraft-cowling" cx=".3" cy=".25"><stop stop-color="#98a292"/><stop offset=".5" stop-color="#4b5a55"/><stop offset=".8" stop-color="#202f30"/><stop offset="1" stop-color="#778074"/></radialGradient>
+          <filter id="cloud-softness" x="-.2" y="-.6" width="1.4" height="2.2"><feGaussianBlur stdDeviation="3"/></filter>
+          <filter id="terrain-grain" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".09 .18" numOctaves="3" seed="18" result="grain"/><feColorMatrix in="grain" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+          <linearGradient id="blue-metal" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#71949a"/><stop offset=".22" stop-color="#59848e"/><stop offset=".65" stop-color="#426f7b"/><stop offset="1" stop-color="#34535e"/></linearGradient>
+          <linearGradient id="instrument-panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#668b8d"/><stop offset=".4" stop-color="#517d83"/><stop offset="1" stop-color="#3c6570"/></linearGradient>
+          <linearGradient id="panel-edge" x2="0" y2="1"><stop stop-color="#a2b2a4"/><stop offset=".07" stop-color="#36565e"/><stop offset=".9" stop-color="#2a454c"/><stop offset="1" stop-color="#182d34"/></linearGradient>
+          <linearGradient id="side-panel" x2="1" y2="1"><stop stop-color="#3f6873"/><stop offset=".45" stop-color="#537b83"/><stop offset="1" stop-color="#263f49"/></linearGradient>
+          <linearGradient id="steel" x2="1" y2=".3"><stop stop-color="#132123"/><stop offset=".2" stop-color="#5e6c68"/><stop offset=".43" stop-color="#b5b4a0"/><stop offset=".52" stop-color="#4e5f5c"/><stop offset="1" stop-color="#152426"/></linearGradient>
+          <linearGradient id="canopy-metal" x2="1" y2=".2"><stop stop-color="#112125"/><stop offset=".2" stop-color="#31444a"/><stop offset=".43" stop-color="#6d7b76"/><stop offset=".5" stop-color="#b3af94"/><stop offset=".57" stop-color="#31464b"/><stop offset="1" stop-color="#12232b"/></linearGradient>
+          <linearGradient id="glass-left" x2="1" y2=".5"><stop stop-color="#e7f7e9" stop-opacity=".38"/><stop offset=".45" stop-color="#c0ddd6" stop-opacity=".07"/><stop offset="1" stop-color="#3e6769" stop-opacity=".16"/></linearGradient>
+          <linearGradient id="glass-right" x2="1" y2="1"><stop stop-color="#f1edcc" stop-opacity=".22"/><stop offset="1" stop-color="#9bbfc2" stop-opacity=".05"/></linearGradient>
+          <linearGradient id="rubber" x2="0" y2="1"><stop stop-color="#3e4844"/><stop offset=".24" stop-color="#1a2425"/><stop offset=".7" stop-color="#0e191c"/><stop offset="1" stop-color="#46514b"/></linearGradient>
+          <radialGradient id="bezel"><stop offset=".78" stop-color="#182426"/><stop offset=".82" stop-color="#5c665e"/><stop offset=".86" stop-color="#171f20"/><stop offset=".94" stop-color="#283435"/><stop offset=".98" stop-color="#72796b"/><stop offset="1" stop-color="#10191b"/></radialGradient>
+          <radialGradient id="dial-face" cx=".4" cy=".35" r=".7"><stop stop-color="#27312e"/><stop offset=".7" stop-color="#17211f"/><stop offset="1" stop-color="#0f1819"/></radialGradient>
+          <linearGradient id="dial-glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6f3d9" stop-opacity=".12"/><stop offset=".45" stop-color="#d9eed9" stop-opacity=".015"/><stop offset=".52" stop-color="#0d1b1e" stop-opacity=".08"/><stop offset="1" stop-color="#e5ddbd" stop-opacity=".04"/></linearGradient>
+          <linearGradient id="nose" x2="0" y2="1"><stop stop-color="#efe7cf"/><stop offset=".5" stop-color="#d4cfb9"/><stop offset="1" stop-color="#8a9991"/></linearGradient>
+          <linearGradient id="main-propeller-blade" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#273b3a" stop-opacity=".1"/><stop offset=".45" stop-color="#6a7163" stop-opacity=".7"/><stop offset="1" stop-color="#d4d1ad" stop-opacity=".2"/></linearGradient>
+          <radialGradient id="propeller-disc"><stop offset=".2" stop-color="#afbaa4" stop-opacity="0"/><stop offset=".75" stop-color="#b2b9a1" stop-opacity=".015"/><stop offset=".93" stop-color="#d8dcc3" stop-opacity=".07"/><stop offset="1" stop-color="#bdc8b4" stop-opacity="0"/></radialGradient>
+          <linearGradient id="red-handle" x2="0" y2="1"><stop stop-color="#dc5a43"/><stop offset=".3" stop-color="#aa352b"/><stop offset="1" stop-color="#591e1d"/></linearGradient>
+          <radialGradient id="knob" cx=".35" cy=".3"><stop stop-color="#55615a"/><stop offset=".45" stop-color="#283532"/><stop offset=".8" stop-color="#101c1f"/><stop offset="1" stop-color="#080f14"/></radialGradient>
+          <radialGradient id="pilot-lamp-off" cx=".35" cy=".28"><stop stop-color="#7c3a31"/><stop offset=".4" stop-color="#4d201f"/><stop offset="1" stop-color="#28131a"/></radialGradient>
+          <radialGradient id="pilot-lamp-on" cx=".35" cy=".3"><stop stop-color="#ffb88b"/><stop offset=".25" stop-color="#ff6e4f"/><stop offset=".65" stop-color="#e4382c"/><stop offset="1" stop-color="#8d201f"/></radialGradient>
+          <linearGradient id="odometer-glass" x2="0" y2="1"><stop stop-color="#000c0f" stop-opacity=".7"/><stop offset=".25" stop-color="#dfecd0" stop-opacity=".05"/><stop offset=".65" stop-color="#dfecd0" stop-opacity="0"/><stop offset="1" stop-color="#000c0f" stop-opacity=".7"/></linearGradient>
+          <clipPath id="afterburner-hundreds-clip"><rect x="-36" y="-16" width="22" height="34" rx="1"/></clipPath>
+          <clipPath id="afterburner-tens-clip"><rect x="-11" y="-16" width="22" height="34" rx="1"/></clipPath>
+          <clipPath id="afterburner-units-clip"><rect x="14" y="-16" width="22" height="34" rx="1"/></clipPath>
+          <linearGradient id="radio-face" x2=".7" y2="1"><stop stop-color="#384141"/><stop offset="1" stop-color="#101c20"/></linearGradient>
+          <linearGradient id="lcd" x2="0" y2="1"><stop stop-color="#111f1d"/><stop offset=".5" stop-color="#202d24"/><stop offset="1" stop-color="#14211e"/></linearGradient>
+          <linearGradient id="well" x2="0" y2="1"><stop stop-color="#071114"/><stop offset="1" stop-color="#273a39"/></linearGradient>
+          <pattern id="metal-grain" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 .5H7M0 4H3" stroke="#e4e3c6" stroke-width=".5" opacity=".045"/><circle cx="5" cy="5" r=".6" fill="#08191e" opacity=".11"/></pattern>
+          <pattern id="grip" width="7" height="8" patternUnits="userSpaceOnUse"><path d="M0 1h7M0 5h7" stroke="#67716a" stroke-opacity=".23" stroke-width="1"/></pattern>
+          <pattern id="sea-ripples" width="170" height="49" patternUnits="userSpaceOnUse"><path d="m8 12 14-1m80 19 23-2m-72 17 8-1m72-35 16 1m-118 12 5-1m36 13 11-1" stroke="#c2d6cf" stroke-width=".7" fill="none" opacity=".12"/></pattern>
+          <filter id="shadow" x="-.3" y="-.3" width="1.6" height="1.6"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#061216" flood-opacity=".6"/></filter>
+          <filter id="needle-shadow" x="-.6" y="-.6" width="2.2" height="2.2"><feDropShadow dx="1.5" dy="2" stdDeviation="1.3" flood-opacity=".8"/></filter>
+          <filter id="phosphor-glow" x="-.4" y="-.6" width="1.8" height="2.2" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="1.3" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="propeller-blur" x="-.08" y="-.08" width="1.16" height="1.16"><feGaussianBlur stdDeviation="1.4"/></filter>
+          <g id="main-propeller-blade-shape"><path d="M-10-26C-16-100-43-223-18-326q8-18 21-5C30-268 38-107 14-26Z" fill="url(#main-propeller-blade)"/><path d="M-19-313q11-7 22-1l3 13q-15-4-27 1Z" fill="#dfd6a1" opacity=".65"/></g>
+          <clipPath id="dashboard-clip"><path d="M100 773C212 435 466 282 800 282s588 153 700 491l45 227H55Z"/></clipPath>
+          <g id="screw"><circle r="8" fill="#182b2f"/><circle r="6.5" fill="url(#steel)" stroke="#84918a" stroke-width=".7"/><path d="m-3.7 2.2 7.4-4.4" stroke="#172528" stroke-width="2"/></g>
+          <g id="small-screw"><circle r="4.5" fill="#243334" stroke="#909a89" stroke-width=".6"/><path d="m-2.5 1 5-2" stroke="#b6b8a0" stroke-width=".8"/></g>
+          <g id="toggle"><circle r="10" fill="url(#steel)" stroke="#172c30" stroke-width="3"/><rect x="-4" y="-5" width="8" height="27" rx="3" fill="url(#steel)" stroke="#172c30"/><circle cy="20" r="5.5" fill="#b1b3a2"/></g>
+          <g id="rotary-knob"><circle r="22" fill="#0e1c20" stroke="#94a292" stroke-width="1.5"/><circle r="18" fill="url(#knob)" stroke="#122428" stroke-width="2"/><path d="M0-15v9" stroke="#d4d3b8" stroke-width="3"/></g>
+          <g id="island-shape">
+            <path d="m-199 24 20-15 44-4 37-16 32 5 41-25 45 10 21-9 39 15 49 1 30 18 34 7 16 20-24 13-41 2-20 10-47-3-46 8-51-12-48 8-43-12-45-3Z" fill="#6caaa2" opacity=".28"/>
+            <path d="m-178 22 25-17 38 1 29-16 29 5 34-35 40-30 24 20 25-12 31 38 28-2 24 21 27 4 24 19-17 15-44 8-29-2-35 12-44-6-39 3-40-11-27 2-25-12Z" fill="url(#island-rock)" filter="url(#terrain-grain)"/>
+            <path d="m-145 13 38-3 20-16 33 4 24-36 47-31-18 31-21 17-6 27-41 4-30 12Zm173-38 13-24 22 31 31 17-25-3-18-10Zm74 28 21-16 32 21-24-2-9 7Z" fill="#8e947d" opacity=".44"/>
+            <path d="m-15-1 25-33 7-25 24 20-14 5-7 27 22 13 15-21 31 29 30-4 28 12-47 8-35-6-30 6-37-8-42 6-30-9Z" fill="#344c3e" opacity=".66"/>
+            <path d="m-175 23 25 10 25-1 28 12 25-2 39 11 40-3 44 6 36-11 26 2 43-9 15-12" fill="none" stroke="#c4b99a" stroke-width="2.4" opacity=".73"/>
+            <path d="m-188 29 28 12 27-1 27 13 35-2 38 11 41-4 43 7 36-11 30 1 44-9 20-15m-350 7 18-2m249 24 29-3" fill="none" stroke="#d0ddd0" stroke-width="1.2" opacity=".48"/>
+            <path d="m-96 9 15 8m-9-4 9 10m35-38 10 12m3-8 12 14m49-18 8 16m6-7 10 16m13-9 19 7m18-8 12 8" fill="none" stroke="#233d37" stroke-width="1.3" opacity=".5"/>
+          </g>
+          <g id="biplane-shape" stroke="#2e3c39" stroke-width=".7" stroke-linejoin="round">
+            <path d="m-99 5 16-10 32 3 11 7-22 9-30-1Z" fill="url(#aircraft-wing)"/>
+            <path d="M-85 2-88-24q3-10 10-7l19 28Z" fill="url(#aircraft-fuselage)"/><path d="m-82-25 4 23" stroke="#c3bea0" opacity=".5"/>
+            <path d="m-71 8 107-26q7-2 11 4L60 2q1 4-6 6L-55 32q-7 1-11-6Z" fill="url(#aircraft-wing)"/>
+            <path d="m-61 13 16 15m5-20 16 15m5-20 16 15m5-20 16 15m5-20 15 15m6-20 15 15" fill="none" stroke="#d2ceb0" stroke-width=".7" opacity=".23"/>
+            <path d="m18 12-2 28 36-32m-36 32 31-1 5-31" fill="none" stroke="#303e3c" stroke-width="2"/>
+            <ellipse cx="16" cy="41" rx="5" ry="7" fill="#1d2b2c"/><ellipse cx="47" cy="36" rx="4" ry="6" fill="#263534"/><ellipse cx="15" cy="40" rx="2" ry="3" fill="#8a9180"/>
+            <path d="M-88 1Q-45-6-7-12q37-9 65 0l12 9-8 17q-43 3-74-4L-88 8Z" fill="url(#aircraft-fuselage)"/>
+            <path d="M-78 2q57-8 100-10l30 2" stroke="#d1c9aa" fill="none" opacity=".6"/>
+            <path d="m-65-2 2 12m7-13 2 14m38-21 1 20m44-22 1 24" fill="none" stroke="#2a4240" opacity=".35"/>
+            <ellipse cx="-6" cy="-9" rx="10" ry="4.5" fill="#172d30" stroke="#b7b397" stroke-width="1.5"/>
+            <path d="M1-13q9-10 13 2" fill="#acccca" fill-opacity=".55" stroke="#8eaaa0"/>
+            <path d="M-7-12q1-7 5-7 5 1 4 7" fill="#565b4a"/><path d="m-4-17 4 1" stroke="#c2b698" stroke-width="2"/>
+            <path d="m-75-27 112-25q7-1 11 5l13 15q2 4-5 7L-60-1q-8 1-12-6Z" fill="url(#aircraft-wing)"/>
+            <path d="m-72-24 14 19m7-24 14 19m7-24 14 19m7-24 14 19m7-24 14 19m7-24 14 19" fill="none" stroke="#d4cdb0" stroke-width=".7" opacity=".28"/>
+            <path d="M-65-4 52-29" fill="none" stroke="#263e3c" opacity=".7"/>
+            <path d="m-60-6 2 31m99-54 5 32m-105-9 21 27m-2-31-19 35m79-49 26 28m-3-33-22 34" fill="none" stroke="#283c3c" stroke-width="1.3"/>
+            <path d="m-14-13 6-19m35 6L19-9" stroke="#394c46" stroke-width="1.4"/>
+            <path d="m-48-31 14-3 3 5-14 3Z" fill="#c2bca0" opacity=".64"/>
+            <path d="m-47-30 10-2-3 8" fill="none" stroke="#34483f" stroke-width="1.1"/>
+            <ellipse cx="61" cy="1" rx="12" ry="16" fill="url(#aircraft-cowling)"/><ellipse cx="64" cy="1" rx="8" ry="12" fill="#263937"/>
+            <path d="m64-10 0 7m5-4-4 5m6 3-5-1m3 8-4-5m-2 8V4m-5 3 4-5m-6-4 5 1m-4-7 4 5" stroke="#9a9f89" stroke-width="1.2"/>
+            <path d="m45 12 5 6m2-7 4 6" stroke="#283c39" stroke-width="2"/>
+            <g class="propeller" transform="translate(77 1)"><ellipse rx="3.5" ry="31" fill="#b7c6bc" fill-opacity=".17" stroke="#bdc9bc" stroke-opacity=".22"/><path d="m0-27 1 54" stroke="#d2d1b7" stroke-opacity=".45" stroke-width="2"/><ellipse rx="3.5" ry="4" fill="#afb7a0"/></g>
+          </g>
+        </defs>
+
+        <g id="outside" aria-hidden="true">
+          <g id="flight-world">
+            <path fill="url(#sky)" d="M-1600-1200h4800v3200h-4800Z"/>
+            <g id="night-celestials" class="night-only"></g>
+            <g id="panorama-clouds"></g>
+            <path d="M-1600 184h4800v1816h-4800Z" fill="url(#sea)"/>
+            <path class="sea-horizon" d="M-1600 184h4800" stroke="#c8d0c1" stroke-width="1.2" opacity=".5"/>
+            <path d="M-1600 194h4800v1806h-4800Z" fill="url(#sea-ripples)"/>
+            <g id="sea-surface" fill="none"></g>
+            <path class="sea-atmosphere" d="M-1600 183h4800v230h-4800Z" fill="url(#horizon-haze)"/>
+            <path class="sea-glints" d="M-1100 245q380-12 760 2t760-3 760 4 760-2 760 1M-1000 322q400-17 800 1t800-3 800 2 800-4" stroke="#c0dacf" stroke-width=".7" fill="none" opacity=".08"/>
+            <g id="sea-islands"></g>
+            <g id="passing-aircraft"></g>
+          </g>
+          <g id="main-propeller" transform="translate(800 208)" aria-hidden="true">
+            <circle r="337" fill="url(#propeller-disc)"/>
+            <circle class="propeller-rim" r="330" fill="none" stroke="#d3dcc9" stroke-width="2" opacity=".13"/>
+            <g class="main-propeller-trails" fill="none" stroke="#e4e5cd" stroke-linecap="round" opacity=".12"><path d="M-295-154A333 333 0 0 1-22-332" stroke-width="8"/><path d="M280 182A333 333 0 0 1-86 322" stroke-width="11"/></g>
+            <g class="main-propeller-rotor" opacity=".32" filter="url(#propeller-blur)"><circle r="336" fill="none"/><use href="#main-propeller-blade-shape"/><use href="#main-propeller-blade-shape" transform="rotate(120)"/><use href="#main-propeller-blade-shape" transform="rotate(240)"/></g>
+            <circle r="18" fill="#485b57" opacity=".3"/>
+          </g>
+          <g id="aircraft-nose">
+          <path d="M364 329Q490 213 800 203q310 10 436 126l78 146H286Z" fill="url(#nose)" stroke="#8f9d92" stroke-width="3"/>
+          <path d="m398 304 136-61 29 3-153 99Zm804 0-136-61-29 3 153 99Z" fill="#be5140"/>
+          <path d="M490 267Q800 153 1110 267" fill="none" stroke="#f7ebc5" stroke-width="3"/>
+          </g>
+          <g id="windshield">
+          <path d="M314 0 45 661l295-226L529 0Z" fill="url(#glass-left)" stroke="#d4dac0" stroke-opacity=".3" stroke-width="2"/>
+          <path d="m1068 0 199 447 306 214L1285 0Z" fill="url(#glass-right)" stroke="#d4dac0" stroke-opacity=".3" stroke-width="2"/>
+          <path d="M340 0 85 602M1260 0l247 602" stroke="#e8e4bf" stroke-width="3" opacity=".22"/>
+          <path d="M573-10 529 246M1027-10l44 256" stroke="#324e4c" stroke-width="23"/>
+          <path d="M567-10 523 246M1033-10l44 256" stroke="#b9c2aa" stroke-width="3"/>
+          <path d="m568 39-4 21m-10 64-3 22m485-107 4 21m10 64 3 22" stroke="#d6d3b0" stroke-width="6"/>
+          </g>
+        </g>
+
+        <g id="upper-console" aria-hidden="true">
+          <path d="M500 305 510 139q2-20 24-20h101q13 0 14 21v21h302v-23q0-19 18-19h98q23 1 24 23l12 163Z" fill="url(#radio-face)" stroke="#89958a" stroke-width="3" filter="url(#shadow)"/>
+          <path d="M506 304h591" stroke="#121d21" stroke-width="10"/>
+          <use href="#small-screw" x="525" y="142"/><use href="#small-screw" x="1076" y="142"/><use href="#small-screw" x="524" y="281"/><use href="#small-screw" x="1080" y="281"/>
+          <rect x="690" y="174" width="251" height="100" rx="5" fill="#121d20" stroke="#798078" stroke-width="2"/>
+          <circle cx="1018" cy="217" r="46" fill="url(#bezel)"/><circle cx="1018" cy="217" r="35" fill="#182528"/>
+          <g id="course-card"><path d="M985 218h66" stroke="#9e9d57" stroke-width="1"/><path d="m999 209 19 7 19-7-8 12h-22Z" fill="#baae63"/><path d="M1018 190v46" stroke="#a3b687" stroke-width="1"/></g>
+          <text id="course-readout" x="1018" y="247" class="stencil tiny course-readout" text-anchor="middle">000°</text>
+          <text x="1018" y="275" class="stencil tiny" text-anchor="middle">КУРС</text>
+          <rect x="746" y="146" width="139" height="12" rx="2" fill="#a7aaa0" stroke="#3c514e"/><path d="M788 126v20h46v-20" fill="none" stroke="#7f8d83" stroke-width="5"/>
+        </g>
+
+        <g id="airframe" aria-hidden="true">
+          <path d="M-32 1000V727L288-44h74L66 777l-2 223Zm1664 0V727L1312-44h-74l296 821 2 223Z" fill="#1b2d32"/>
+          <path d="M-10 752 295-20h48L48 762l-1 238H-6Zm1620 0L1305-20h-48l295 782 1 238h53Z" fill="url(#canopy-metal)" stroke="#0e2027" stroke-width="5"/>
+          <path d="M17 724 308-14m1275 738L1292-14" stroke="#c0b99b" stroke-width="3"/>
+          <path d="m23 741 270-696m1284 696L1307 45" stroke="#84958b" stroke-width="2" opacity=".6"/>
+          <path d="M53 759 15 1000h102l62-325Zm1494 0 38 241h-102l-62-325Z" fill="url(#blue-metal)" stroke="#7a9190" stroke-width="3"/>
+          <path d="m0 843 101 157H0Zm1600 0-101 157h101Z" fill="#d9d8c0"/>
+          <path d="m22 848 86 146m1470-146-86 146" stroke="#b9bca9" stroke-width="9"/>
+          <g id="canopy-bolts"></g>
+          <path d="M100 773C212 435 466 282 800 282s588 153 700 491l45 227H55Z" fill="url(#blue-metal)"/>
+          <path d="M100 773C212 435 466 282 800 282s588 153 700 491l45 227H55Z" fill="url(#metal-grain)"/>
+          <path d="M102 774C214 436 468 283 800 283s586 153 698 491" fill="none" stroke="#0d1c23" stroke-width="39"/>
+          <path d="M102 766C214 428 468 275 800 275s586 153 698 491" fill="none" stroke="url(#rubber)" stroke-width="26"/>
+          <path d="M102 760C214 422 468 269 800 269s586 153 698 491" fill="none" stroke="#71817b" stroke-width="2"/>
+          <path d="M109 778C220 445 470 290 800 290s580 155 691 488" fill="none" stroke="#87938a" stroke-width="1.5" stroke-dasharray="3 7" opacity=".65"/>
+          <path d="M175 632q58-99 153-156l-15 434-171 90H78Z" fill="url(#side-panel)" stroke="#263f47" stroke-width="2"/>
+          <path d="M1425 632q-58-99-153-156l15 434 171 90h64Z" fill="url(#side-panel)" stroke="#263f47" stroke-width="2"/>
+          <path d="M351 485Q358 425 417 396Q596 313 800 319Q1004 313 1183 396Q1242 425 1249 485L1236 795Q1232 854 1175 857H425Q368 854 364 795Z" fill="url(#panel-edge)" transform="translate(0 6)" filter="url(#shadow)"/>
+          <path d="M351 485Q358 425 417 396Q596 313 800 319Q1004 313 1183 396Q1242 425 1249 485L1236 795Q1232 854 1175 857H425Q368 854 364 795Z" fill="url(#instrument-panel)" stroke="#9cafa0" stroke-width="2"/>
+          <path d="M351 485Q358 425 417 396Q596 313 800 319Q1004 313 1183 396Q1242 425 1249 485L1236 795Q1232 854 1175 857H425Q368 854 364 795Z" fill="url(#metal-grain)"/>
+          <g id="paint-wear" clip-path="url(#dashboard-clip)"></g>
+          <path d="m379 891 99 11 47-8h523l59 8 107-12" fill="none" stroke="#25454d" stroke-width="18"/>
+          <path d="M392 904h812" stroke="#759599" stroke-width="3"/>
+          <path d="M527 927q263-70 547 0l109 73H422Z" fill="url(#well)" stroke="#304b50" stroke-width="4"/>
+          <path d="m619 953 39 47m310-47-39 47M691 928l17 72m219-72-17 72" stroke="#40524d" stroke-width="9"/>
+          <path d="M723 1000v-72h167v72" fill="#243535" stroke="#101e22" stroke-width="4"/>
+          <g id="panel-screws"></g>
+        </g>
+
+        <g id="panel-furniture" aria-hidden="true">
+          <rect x="741" y="333" width="118" height="25" rx="2" fill="#172a2d" stroke="#87978b"/>
+          <text id="callsign-plate" x="800" y="350" text-anchor="middle" class="stencil registration">СПИЧКА · 052</text>
+          <rect x="708" y="379" width="176" height="194" rx="8" fill="#182d31" stroke="#253b40" stroke-width="6" filter="url(#shadow)"/>
+          <rect x="719" y="390" width="154" height="149" rx="4" fill="#081a20" stroke="#8b9d8e" stroke-width="2"/>
+          <path d="M729 403h134v121H729Z" fill="url(#lcd)"/>
+          <g stroke="#6b8e76" stroke-width=".5" opacity=".23"><path d="M741 404v120m17-120v120m17-120v120m17-120v120m17-120v120m17-120v120m17-120v120M730 420h132m-132 19h132m-132 19h132m-132 19h132m-132 19h132m-132 19h132"/></g>
+          <text x="796" y="425" text-anchor="middle" class="monitor-heading">ПРОТОКОЛ ПИЛОТА</text>
+          <text id="monitor-stat" x="796" y="451" text-anchor="middle" class="monitor-label">ПОДВИЖНОСТЬ</text>
+          <text id="monitor-value" x="796" y="491" text-anchor="middle" class="monitor-value">03</text>
+          <text id="monitor-instrument" x="796" y="516" text-anchor="middle" class="monitor-heading">СКОРОСТЬ</text>
+          <rect x="734" y="550" width="13" height="11" rx="1" fill="#78978b"/><rect x="759" y="550" width="13" height="11" rx="1" fill="#263f3f" stroke="#718c7e"/>
+          <text x="851" y="559" text-anchor="end" class="stencil tiny">БК–52</text>
+          <use href="#small-screw" x="718" y="382"/><use href="#small-screw" x="874" y="382"/><use href="#small-screw" x="718" y="570"/><use href="#small-screw" x="874" y="570"/>
+          <rect x="411" y="386" width="78" height="44" rx="3" fill="#203a3b" stroke="#7e958a" stroke-width="2"/><rect x="419" y="394" width="62" height="27" fill="url(#lcd)"/>
+          <text x="450" y="414" text-anchor="middle" class="lcd-text">24.0</text><text x="450" y="441" text-anchor="middle" class="stencil tiny">БОРТ. НАПРЯЖЕНИЕ</text>
+          <g id="decorative-gauges"></g>
+          <rect x="1113" y="603" width="95" height="179" rx="6" fill="#1b3237" stroke="#8a9b8d" stroke-width="2"/>
+          <rect x="1121" y="613" width="78" height="158" fill="#263e3e" stroke="#10252b" stroke-width="2"/>
+          <g id="hp-segments"></g>
+          <path d="M1159 609v166" stroke="#b5c3ac" stroke-width="2"/>
+          <text x="1160" y="796" text-anchor="middle" class="stencil tiny">РЕСУРС ПИЛОТА</text>
+          <use href="#small-screw" x="1121" y="611"/><use href="#small-screw" x="1199" y="611"/><use href="#small-screw" x="1121" y="774"/><use href="#small-screw" x="1199" y="774"/>
+          <g transform="translate(298 538) rotate(12)"><circle r="17" fill="url(#steel)" stroke="#1d383e" stroke-width="3"/><rect x="-8" y="-3" width="16" height="75" rx="5" fill="url(#steel)"/><rect x="-73" y="40" width="105" height="21" rx="9" fill="url(#red-handle)" stroke="#562923" stroke-width="2"/><path d="M-62 44h74" stroke="#e77c59" stroke-width="2" opacity=".5"/></g>
+          <path d="M284 755v111" stroke="#1c3031" stroke-width="17"/><path d="M282 757v103" stroke="#a6a78d" stroke-width="8"/>
+          <use href="#rotary-knob" x="284" y="870"/><text x="284" y="906" text-anchor="middle" class="stencil tiny">ШАГ ВИНТА</text>
+          <rect x="173" y="733" width="59" height="29" rx="3" fill="#243c40" stroke="#8c9b8a"/><circle cx="187" cy="747" r="8" fill="#401c1a" stroke="#af8973" stroke-width="2"/><circle cx="217" cy="747" r="8" fill="#17312d" stroke="#94a98b" stroke-width="2"/>
+          <use href="#toggle" x="180" y="797"/><use href="#toggle" x="220" y="797"/><text x="199" y="837" text-anchor="middle" class="stencil tiny">ЗАЖИГАНИЕ</text>
+          <use href="#rotary-knob" x="184" y="915"/><text x="184" y="949" text-anchor="middle" class="stencil tiny">ОБОГРЕВ</text>
+          <path d="M140 868h85M141 873h56" stroke="#b5bd9e" stroke-width="2" opacity=".6"/>
+          <text x="384" y="879" class="stencil tiny">SKYPHANTOMS</text><text x="1208" y="879" text-anchor="end" class="stencil tiny">НЕ НАЖИМАТЬ НА СТЕКЛО</text>
+        </g>
+
+        <g id="flight-instruments"></g>
+        <g id="lighting-button" class="lighting-switch" transform="translate(1313 650)" tabindex="0" role="switch" aria-checked="false" aria-label="Ночной режим">
+          <title>День / ночь. Нажмите, чтобы включить ночной режим.</title>
+          <circle class="lighting-switch-base" r="45" fill="#20383d" stroke="#a5af96" stroke-width="2"/>
+          <path d="m-26-25-4-4m56 4 4-4" stroke="#bdc6ad" stroke-width="2"/>
+          <text x="-29" y="-34" text-anchor="middle" class="stencil micro">ДЕНЬ</text><text x="29" y="-34" text-anchor="middle" class="stencil micro">НОЧЬ</text>
+          <g id="lighting-rotor" transform="rotate(-45)"><use href="#rotary-knob"/></g>
+          <text id="lighting-readout" y="34" text-anchor="middle" class="stencil micro">ДЕНЬ</text>
+          <circle r="47" fill="transparent" class="lighting-switch-hit"/>
+        </g>
+        <g id="annunciators" role="group" aria-label="Живучесть узлов самолёта. Нажатие снимает одну единицу STR, при нуле следующий клик восстанавливает узел."></g>
+        <g id="afterburner-counter" transform="translate(585 211)" role="group" aria-label="Барабанный счётчик форсажей">
+          <circle class="instrument-mount" r="65" fill="#203539" stroke="#91a38f" stroke-width="1"/><circle class="instrument-bezel" r="61" fill="url(#bezel)"/><circle r="51" fill="url(#dial-face)"/>
+          <text y="-34" text-anchor="middle" class="dial-caption" font-size="9">ФОРСАЖ</text>
+          <rect x="-40" y="-21" width="80" height="43" rx="3" fill="#091519" stroke="#8b9e7d" stroke-width="1.4"/>
+          <path d="M-12.5-18v37m25-37v37" stroke="#52674e" stroke-width="1"/>
+          <g clip-path="url(#afterburner-hundreds-clip)" aria-hidden="true"><g id="afterburner-hundreds" class="odometer-reel"></g></g>
+          <g clip-path="url(#afterburner-tens-clip)" aria-hidden="true"><g id="afterburner-tens" class="odometer-reel"></g></g>
+          <g clip-path="url(#afterburner-units-clip)" aria-hidden="true"><g id="afterburner-units" class="odometer-reel"></g></g>
+          <rect class="odometer-window-lens" x="-38" y="-19" width="76" height="39" rx="2" fill="url(#odometer-glass)"/>
+          <g id="afterburner-spend" class="afterburner-button" tabindex="0" role="button" aria-label="Потратить один форсаж"><title>Потратить один форсаж</title><rect x="-40" y="-22" width="80" height="46" rx="3" class="odometer-hit"/></g>
+          <text id="afterburner-capacity-label" y="33" text-anchor="middle" class="dial-unit" font-size="8">ИЗ 002</text>
+          <g id="afterburner-refill" class="afterburner-refill" tabindex="0" role="button" aria-label="Восстановить запас форсажей"><title>Восстановить запас форсажей</title><rect x="-12" y="37" width="24" height="18" rx="4"/><text y="50" text-anchor="middle">↻</text></g>
+        </g>
+        <g id="pilot-health-warning" class="pilot-health-warning" role="img" aria-label="Лампа критического здоровья пилота, загорается при 2 HP и ниже">
+          <rect x="681" y="744" width="82" height="86" rx="8" fill="url(#radio-face)" stroke="#708477" stroke-width="1.5"/>
+          <use href="#small-screw" x="690" y="753"/><use href="#small-screw" x="754" y="753"/><use href="#small-screw" x="690" y="820"/><use href="#small-screw" x="754" y="820"/>
+          <circle cx="722" cy="781" r="32" fill="url(#steel)" stroke="#102126" stroke-width="2"/><circle cx="722" cy="781" r="28" fill="#171c20"/>
+          <circle id="lamp-health" class="pilot-health-lens" cx="722" cy="781" r="25" fill="url(#pilot-lamp-off)"/>
+          <path d="M706 768q9-11 23-7" fill="none" stroke="#ffd4bb" stroke-width="3" stroke-linecap="round" opacity=".22"/>
+          <text x="722" y="820" text-anchor="middle" class="stencil" font-size="8">ЗДОРОВЬЕ</text>
+        </g>
+        <g id="control-stick" class="control-stick" transform="translate(801 988)" tabindex="0" role="group" aria-label="Ручка управления. Влево и вправо меняют направление полёта по горизонтали на 360 градусов. Вверх и вниз меняют тангаж. Отпустите, чтобы сохранить курс. Двойной щелчок или пробел выравнивает горизонт, сохраняя направление. Также работают клавиши со стрелками.">
+          <title>Влево / вправо — разворот по курсу. Вверх / вниз — тангаж. Отпустите, чтобы сохранить направление. Двойной щелчок / пробел — выровнять горизонт.</title>
+          <g id="stick-moving"><path d="M-15 35-11-50h22l4 85" fill="url(#steel)" stroke="#0b1b20" stroke-width="5"/><path d="M-20-46q-13-11-10-43l5-47q1-16 19-17h16q21 1 21 20l-2 46q-3 30-17 41Z" fill="url(#knob)" stroke="#0b171b" stroke-width="4"/><path d="M-20-113h39v58h-39Z" fill="url(#grip)"/><path d="M-21-126q20-16 42 0" fill="none" stroke="#63716b" stroke-width="3"/><ellipse cx="14" cy="-139" rx="10" ry="6" fill="#a43f32" stroke="#e48e64" stroke-width="1"/><path d="M-16-109v42" stroke="#6c7971" stroke-opacity=".4" stroke-width="2"/></g>
+          <rect class="stick-focus" x="-42" y="-169" width="84" height="162" rx="26"/><rect class="stick-hit" x="-44" y="-175" width="88" height="184" rx="25"/>
+        </g>
+        <g id="aircraft-panel" class="aircraft-panel" transform="translate(1248 700)" role="button" tabindex="0" aria-label="Открыть характеристики самолёта и 10 слотов оборудования" aria-haspopup="dialog" aria-controls="aircraft-dialog">
+          <title>Характеристики самолёта и 10 слотов оборудования. Нажмите, чтобы редактировать.</title>
+          <rect class="aircraft-panel-outline" width="208" height="128" rx="5" fill="url(#radio-face)" stroke="#849187" stroke-width="2"/>
+          <path d="M9 29h190" stroke="#617c70" stroke-width=".8"/>
+          <use href="#small-screw" x="9" y="10"/><use href="#small-screw" x="199" y="10"/><use href="#small-screw" x="9" y="119"/><use href="#small-screw" x="199" y="119"/>
+          <text x="23" y="20" class="stencil tiny">САМОЛЁТ</text><text x="186" y="21" class="stencil aircraft-expand" text-anchor="end">↗</text>
+          <text x="18" y="48" class="stencil tiny">СКОРОСТЬ</text><text id="aircraft-speed-readout" x="185" y="48" class="aircraft-value" text-anchor="end">3</text>
+          <text x="18" y="70" class="stencil tiny">МАНЁВРЕННОСТЬ</text><text id="aircraft-maneuverability-readout" x="185" y="70" class="aircraft-value" text-anchor="end">4</text>
+          <text x="18" y="92" class="stencil tiny">БРОНЯ</text><text id="aircraft-armor-readout" x="185" y="92" class="aircraft-value" text-anchor="end">0</text>
+          <text x="18" y="115" class="stencil tiny">СЛОТЫ</text><text id="aircraft-slots-readout" x="185" y="115" class="aircraft-value aircraft-slots-value" text-anchor="end">03 / 10</text>
+          <rect class="aircraft-panel-hit" width="208" height="128" rx="5"/>
+        </g>
+        <g id="resource-radio" transform="translate(1232 844)">
+          <rect width="240" height="139" rx="6" fill="url(#radio-face)" stroke="#0c232b" stroke-width="5" filter="url(#shadow)"/>
+          <rect x="7" y="6" width="226" height="126" rx="3" fill="none" stroke="#71877d"/>
+          <use href="#small-screw" x="14" y="14"/><use href="#small-screw" x="225" y="14"/><use href="#small-screw" x="14" y="124"/><use href="#small-screw" x="225" y="124"/>
+          <text x="24" y="28" class="stencil tiny">ЗДОРОВЬЕ</text><text x="24" y="85" class="stencil tiny">ОЧКИ УДАЧИ</text>
+          <rect x="22" y="34" width="129" height="34" rx="3" fill="url(#lcd)" stroke="#0b191e" stroke-width="2"/>
+          <rect x="22" y="91" width="129" height="31" rx="3" fill="url(#lcd)" stroke="#0b191e" stroke-width="2"/>
+          <text id="hp-readout" x="87" y="59" text-anchor="middle" class="resource-value">08 / 08</text><text id="luck-readout" x="87" y="115" text-anchor="middle" class="resource-value">01 / 01</text>
+          <g class="resource-button" role="button" tabindex="0" data-resource="hp" data-delta="-1" aria-label="Уменьшить здоровье"><rect x="164" y="35" width="27" height="32" rx="3"/><text x="177.5" y="57">−</text></g>
+          <g class="resource-button" role="button" tabindex="0" data-resource="hp" data-delta="1" aria-label="Увеличить здоровье"><rect x="196" y="35" width="27" height="32" rx="3"/><text x="209.5" y="57">+</text></g>
+          <g class="resource-button" role="button" tabindex="0" data-resource="luck" data-delta="-1" aria-label="Потратить очко удачи"><rect x="164" y="91" width="27" height="31" rx="3"/><text x="177.5" y="113">−</text></g>
+          <g class="resource-button" role="button" tabindex="0" data-resource="luck" data-delta="1" aria-label="Восстановить очко удачи"><rect x="196" y="91" width="27" height="31" rx="3"/><text x="209.5" y="113">+</text></g>
+        </g>
+      </svg>
+      <div class="kneeboard-mount" id="kneeboard-mount">
+        <aside class="skills-panel" aria-labelledby="skills-title">
+          <span class="panel-rivet rivet-top-left" aria-hidden="true"></span><span class="panel-rivet rivet-top-right" aria-hidden="true"></span><span class="panel-rivet rivet-bottom-left" aria-hidden="true"></span><span class="panel-rivet rivet-bottom-right" aria-hidden="true"></span>
+          <header class="skills-header"><div><span class="eyebrow">ЛИЧНАЯ ПОДГОТОВКА</span><h2 id="skills-title">Навыки пилота</h2></div><button class="skills-expand" id="skills-expand" type="button" aria-haspopup="dialog" aria-label="Развернуть планшет навыков" title="Развернуть планшет">↗</button></header>
+          <div id="skills-list" class="skills-list" role="region" aria-label="Навыки пилота, прокручиваемый список" tabindex="0"></div>
+          <footer class="skills-footer"><span>БОНУС 0 … +5</span><div class="skills-add-control"><output id="skill-count" aria-live="polite">10 / 25</output><button id="add-skill" class="skill-add-button" type="button" aria-label="Добавить один навык" title="Добавить навык">+</button></div></footer>
+        </aside>
+      </div>
+      <div class="scene-corner"><span>052</span><span>SKYPHANTOMS · МЕСТО ПИЛОТА</span></div>
+      <div class="heading-indicator"><span>КУРС</span><output id="flight-heading">000° · С</output></div>
+    </div>
+    <footer class="flight-strip">
+      <span class="interaction-hint"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 14 7-7m-7 0v7h7M4 4h12v12"/></svg> Ручка: курс 360° <button class="level-flight-button" id="level-flight-button" type="button">Выровнять</button></span>
+      <span class="selected-stat" id="selected-stat">Подвижность <span>· Скорость</span></span>
+      <span class="save-status" id="save-status" role="status"><span class="live-dot"></span> Бортовой журнал сохранён</span>
+    </footer>
+    </div>
+  </main>
+
+  <dialog id="logbook" aria-labelledby="logbook-title">
+    <form method="dialog" class="book-header"><div><span class="eyebrow">ЛИЧНОЕ ДЕЛО · 052</span><h1 id="logbook-title">Лётная книжка</h1></div><button class="close-button" aria-label="Закрыть лётную книжку">×</button></form>
+    <div class="book-content">
+      <div class="pilot-fields"><label>Имя / Позывной<input id="pilot-name" autocomplete="off" maxlength="80" placeholder="Имя / Позывной"></label><label>Фракция / Биография<textarea id="pilot-bio" rows="2" placeholder="Фракция, история персонажа…"></textarea></label></div>
+      <div class="section-heading"><h2>Характеристики</h2><span id="allocation-status">24 / 24 очка</span></div>
+      <p class="book-hint">Всего 24 очка. Каждая характеристика — от 1 до 5.</p>
+      <div id="stat-fields" class="stat-fields"></div>
+      <div class="section-heading resources-heading"><h2>Ресурсы состояния</h2></div>
+      <div class="resource-fields"><label>Здоровье пилота<span class="resource-input"><input id="hp-current" type="number" min="0" aria-label="Текущее здоровье"> <span>/ <output id="hp-max">8</output></span></span><small>Жизненность × 2</small></label><label>Очки удачи<span class="resource-input"><input id="luck-current" type="number" min="0" aria-label="Текущие очки удачи"> <span>/ <output id="luck-max">1</output></span></span><small>Максимум равен Удаче</small></label></div>
+      <label class="notes-label">Бортовые заметки<textarea id="pilot-notes" rows="3" placeholder="Записи о вылетах, снаряжение, приметы…"></textarea></label>
+      <div class="book-bottom"><span id="book-save-status">Сохраняется на этом устройстве</span><button id="reset-button" type="button">Очистить журнал</button></div>
+    </div>
+  </dialog>
+  <dialog id="aircraft-dialog" aria-labelledby="aircraft-title">
+    <form method="dialog" class="book-header"><div><span class="eyebrow">БОРТОВОЙ ПАСПОРТ · 052</span><h1 id="aircraft-title">Самолёт</h1></div><button class="close-button" aria-label="Закрыть паспорт самолёта">×</button></form>
+    <div class="book-content aircraft-content">
+      <div class="aircraft-base-fields"><label>Скорость<input id="aircraft-speed" type="number" min="0" max="99" step="1"></label><label>Манёвренность<input id="aircraft-maneuverability" type="number" min="0" max="99" step="1"></label><label>Броня<input id="aircraft-armor" type="number" min="0" max="99" step="1"></label></div>
+      <div class="aircraft-service-fields"><label>Техпредел<input id="aircraft-technical-limit" type="number" min="0" max="7" step="1"></label><label>Запас форсажей<input id="aircraft-afterburner-capacity" type="number" min="0" max="999" step="1"></label><label>Форсажей осталось<input id="aircraft-afterburners" type="number" min="0" max="999" step="1"></label></div>
+      <div class="section-heading"><h2>Живучесть узлов</h2><span id="structure-maximum">STR: 8</span></div>
+      <p class="book-hint">Базовый STR = Техпредел + 3. Максимум каждого узла можно задать отдельно: 1–10. Клик снимает 1 STR; следующий после нуля восстанавливает узел. Синяя полоса — броня.</p>
+      <div class="structure-headings" aria-hidden="true"><span>УЗЕЛ · D10</span><span>БРОНЯ</span><span>МАКС.</span><span>СТРУКТУРА</span></div>
+      <div id="aircraft-structure" class="aircraft-structure"></div>
+      <div class="section-heading"><h2>Слоты оборудования</h2><span id="aircraft-slot-count">Занято: 3 / 10</span></div>
+      <p class="book-hint">Один модуль — один слот. Укажите название и эффект, урон или число применений.</p>
+      <div class="aircraft-slot-headings" aria-hidden="true"><span></span><span>МОДУЛЬ / ОБОРУДОВАНИЕ</span><span>ЭФФЕКТ</span></div>
+      <div id="aircraft-slots" class="aircraft-slots"></div>
+      <button id="add-aircraft-slot" class="add-aircraft-slot" type="button"><span aria-hidden="true">+</span> Добавить слот <output id="aircraft-row-count">3 / 10</output></button>
+      <p class="aircraft-save-note">Параметры и оборудование сохраняются вместе с персонажем.</p>
+    </div>
+  </dialog>
+  <dialog id="skills-dialog" class="skills-dialog" aria-labelledby="skills-title">
+    <form method="dialog" class="skills-dialog-controls"><button class="close-button" aria-label="Свернуть планшет навыков">×</button></form>
+    <div id="skills-dialog-slot"></div>
+  </dialog>
+  <dialog id="dice-dialog" aria-labelledby="dice-title">
+    <form method="dialog" class="book-header"><div><span class="eyebrow">БОРТОВОЙ ЖУРНАЛ · D10</span><h1 id="dice-title">Броски кубиков</h1></div><button class="close-button" aria-label="Закрыть броски кубиков">×</button></form>
+    <div class="dice-content">
+      <fieldset class="dice-count-field"><legend>Количество кубиков <span id="dice-formula">1D10</span></legend><div class="dice-count-options">
+        <label><input type="radio" name="dice-count" value="1" checked><span>1</span></label><label><input type="radio" name="dice-count" value="2"><span>2</span></label><label><input type="radio" name="dice-count" value="3"><span>3</span></label><label><input type="radio" name="dice-count" value="4"><span>4</span></label><label><input type="radio" name="dice-count" value="5"><span>5</span></label>
+      </div></fieldset>
+      <div class="dice-stage" id="dice-stage"><span class="dice-stage-label">БРОСКОВАЯ ПЛОЩАДКА</span><div id="dice-tray" class="dice-tray" data-count="1" aria-hidden="true"></div><span class="dice-stage-note">D10 · ЗНАЧЕНИЯ 1–10</span></div>
+      <div class="dice-summary" id="dice-summary" role="status" aria-live="polite" aria-atomic="true"><div><span id="dice-result-label">Готов к броску</span><p id="dice-results">Выберите кубики и бросайте</p></div><div class="dice-total-box"><span>СУММА</span><output id="dice-total">—</output></div></div>
+      <button class="roll-button" id="roll-button" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 6-2 10-7 4-7-4L3 8Zm0 0v7m-9-1 9 1 9-1M5 18l7-9 7 9m-7-9v13"/></svg><span id="roll-button-label">Бросить 1D10</span></button>
+      <section class="dice-history" aria-labelledby="dice-history-title"><h2 id="dice-history-title">Последние броски</h2><ol id="dice-history-list"><li class="dice-history-empty">Здесь появятся результаты бросков</li></ol></section>
+    </div>
+  </dialog>
+</body>
+</html>

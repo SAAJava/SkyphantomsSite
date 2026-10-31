@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172223">
+  <title>SKYPHANTOMS · Место пилота</title>
+  <link rel="stylesheet" href="cockpit.css">
+  <script src="cockpit.js" defer></script>
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="./" aria-label="SKYPHANTOMS — место пилота">
+      <svg viewBox="0 0 52 28" aria-hidden="true"><path d="M2 8h16l8-6 8 6h16L36 18h-7v8h-6v-8h-7Z" fill="currentColor"/><path d="m5 13 12 9h4v-5m26-4-12 9h-4v-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <span>SKYPHANTOMS<small>ПРОТОКОЛ ПИЛОТА</small></span>
+    </a>
+    <div class="toolbar-center"><span class="live-dot"></span> МЕСТО ПИЛОТА <span class="toolbar-divider">/</span> ЯК–52</div>
+    <div class="toolbar-actions">
+      <button class="icon-button" id="lighting-button" type="button" aria-label="Включить подсветку приборов" aria-pressed="false" title="Подсветка приборов"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8.5 14.5a6 6 0 1 1 7 0C14.5 15.2 15 16 15 16H9s.5-.8-.5-1.5Z"/><path d="M12 1v2M2 11h2m16 0h2M4 3l2 2m14-2-2 2"/></svg></button>
+      <button class="book-button" id="book-button" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 0v15m-2 1a2 2 0 0 1 2-1h14M9 7h6m-6 4h6"/></svg><span>Лётная книжка</span></button>
+      <button class="icon-button fullscreen-button" id="fullscreen-button" type="button" aria-label="На весь экран" title="На весь экран"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div class="scene-frame">
+      <svg id="cockpit" viewBox="0 0 1600 1000" role="group" aria-label="Кабина Як-52. Восемь приборов управляют характеристиками персонажа.">
+        <defs>
+          <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#a6bdc0"/><stop offset=".65" stop-color="#d4d7c5"/><stop offset="1" stop-color="#eee4c5"/></linearGradient>
+          <linearGradient id="field" x2="0" y2="1"><stop stop-color="#b1af7d"/><stop offset="1" stop-color="#d8bf83"/></linearGradient>
+          <linearGradient id="runway" x2="0" y2="1"><stop stop-color="#b3b19d"/><stop offset="1" stop-color="#d4ccb0"/></linearGradient>
+          <linearGradient id="blue-metal" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#71949a"/><stop offset=".22" stop-color="#59848e"/><stop offset=".65" stop-color="#426f7b"/><stop offset="1" stop-color="#34535e"/></linearGradient>
+          <linearGradient id="instrument-panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#668b8d"/><stop offset=".4" stop-color="#517d83"/><stop offset="1" stop-color="#3c6570"/></linearGradient>
+          <linearGradient id="panel-edge" x2="0" y2="1"><stop stop-color="#a2b2a4"/><stop offset=".07" stop-color="#36565e"/><stop offset=".9" stop-color="#2a454c"/><stop offset="1" stop-color="#182d34"/></linearGradient>
+          <linearGradient id="side-panel" x2="1" y2="1"><stop stop-color="#3f6873"/><stop offset=".45" stop-color="#537b83"/><stop offset="1" stop-color="#263f49"/></linearGradient>
+          <linearGradient id="steel" x2="1" y2=".3"><stop stop-color="#132123"/><stop offset=".2" stop-color="#5e6c68"/><stop offset=".43" stop-color="#b5b4a0"/><stop offset=".52" stop-color="#4e5f5c"/><stop offset="1" stop-color="#152426"/></linearGradient>
+          <linearGradient id="canopy-metal" x2="1" y2=".2"><stop stop-color="#112125"/><stop offset=".2" stop-color="#31444a"/><stop offset=".43" stop-color="#6d7b76"/><stop offset=".5" stop-color="#b3af94"/><stop offset=".57" stop-color="#31464b"/><stop offset="1" stop-color="#12232b"/></linearGradient>
+          <linearGradient id="glass-left" x2="1" y2=".5"><stop stop-color="#e7f7e9" stop-opacity=".38"/><stop offset=".45" stop-color="#c0ddd6" stop-opacity=".07"/><stop offset="1" stop-color="#3e6769" stop-opacity=".16"/></linearGradient>
+          <linearGradient id="glass-right" x2="1" y2="1"><stop stop-color="#f1edcc" stop-opacity=".22"/><stop offset="1" stop-color="#9bbfc2" stop-opacity=".05"/></linearGradient>
+          <linearGradient id="rubber" x2="0" y2="1"><stop stop-color="#3e4844"/><stop offset=".24" stop-color="#1a2425"/><stop offset=".7" stop-color="#0e191c"/><stop offset="1" stop-color="#46514b"/></linearGradient>
+          <radialGradient id="bezel"><stop offset=".78" stop-color="#182426"/><stop offset=".82" stop-color="#5c665e"/><stop offset=".86" stop-color="#171f20"/><stop offset=".94" stop-color="#283435"/><stop offset=".98" stop-color="#72796b"/><stop offset="1" stop-color="#10191b"/></radialGradient>
+          <radialGradient id="dial-face" cx=".4" cy=".35" r=".7"><stop stop-color="#27312e"/><stop offset=".7" stop-color="#17211f"/><stop offset="1" stop-color="#0f1819"/></radialGradient>
+          <linearGradient id="dial-glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6f3d9" stop-opacity=".12"/><stop offset=".45" stop-color="#d9eed9" stop-opacity=".015"/><stop offset=".52" stop-color="#0d1b1e" stop-opacity=".08"/><stop offset="1" stop-color="#e5ddbd" stop-opacity=".04"/></linearGradient>
+          <linearGradient id="nose" x2="0" y2="1"><stop stop-color="#efe7cf"/><stop offset=".5" stop-color="#d4cfb9"/><stop offset="1" stop-color="#8a9991"/></linearGradient>
+          <linearGradient id="red-handle" x2="0" y2="1"><stop stop-color="#dc5a43"/><stop offset=".3" stop-color="#aa352b"/><stop offset="1" stop-color="#591e1d"/></linearGradient>
+          <radialGradient id="knob" cx=".35" cy=".3"><stop stop-color="#55615a"/><stop offset=".45" stop-color="#283532"/><stop offset=".8" stop-color="#101c1f"/><stop offset="1" stop-color="#080f14"/></radialGradient>
+          <linearGradient id="radio-face" x2=".7" y2="1"><stop stop-color="#384141"/><stop offset="1" stop-color="#101c20"/></linearGradient>
+          <linearGradient id="lcd" x2="0" y2="1"><stop stop-color="#111f1d"/><stop offset=".5" stop-color="#202d24"/><stop offset="1" stop-color="#14211e"/></linearGradient>
+          <linearGradient id="well" x2="0" y2="1"><stop stop-color="#071114"/><stop offset="1" stop-color="#273a39"/></linearGradient>
+          <pattern id="metal-grain" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 .5H7M0 4H3" stroke="#e4e3c6" stroke-width=".5" opacity=".045"/><circle cx="5" cy="5" r=".6" fill="#08191e" opacity=".11"/></pattern>
+          <pattern id="grip" width="7" height="8" patternUnits="userSpaceOnUse"><path d="M0 1h7M0 5h7" stroke="#67716a" stroke-opacity=".23" stroke-width="1"/></pattern>
+          <filter id="shadow" x="-.3" y="-.3" width="1.6" height="1.6"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#061216" flood-opacity=".6"/></filter>
+          <filter id="needle-shadow" x="-.6" y="-.6" width="2.2" height="2.2"><feDropShadow dx="1.5" dy="2" stdDeviation="1.3" flood-opacity=".8"/></filter>
+          <clipPath id="dashboard-clip"><path d="M100 773C212 435 466 282 800 282s588 153 700 491l45 227H55Z"/></clipPath>
+          <g id="screw"><circle r="8" fill="#182b2f"/><circle r="6.5" fill="url(#steel)" stroke="#84918a" stroke-width=".7"/><path d="m-3.7 2.2 7.4-4.4" stroke="#172528" stroke-width="2"/></g>
+          <g id="small-screw"><circle r="4.5" fill="#243334" stroke="#909a89" stroke-width=".6"/><path d="m-2.5 1 5-2" stroke="#b6b8a0" stroke-width=".8"/></g>
+          <g id="toggle"><circle r="10" fill="url(#steel)" stroke="#172c30" stroke-width="3"/><rect x="-4" y="-5" width="8" height="27" rx="3" fill="url(#steel)" stroke="#172c30"/><circle cy="20" r="5.5" fill="#b1b3a2"/></g>
+          <g id="rotary-knob"><circle r="22" fill="#0e1c20" stroke="#94a292" stroke-width="1.5"/><circle r="18" fill="url(#knob)" stroke="#122428" stroke-width="2"/><path d="M0-15v9" stroke="#d4d3b8" stroke-width="3"/></g>
+        </defs>
+
+        <g id="outside" aria-hidden="true">
+          <path fill="url(#sky)" d="M0 0h1600v1000H0z"/>
+          <path d="M0 74Q105 44 209 66T425 62T690 47T916 56T1175 33T1600 48" fill="none" stroke="#e7e6ce" stroke-opacity=".4" stroke-width="15"/>
+          <path d="M0 135 28 116 40 128 55 106 76 128 93 112 109 125 133 103 155 112 165 98 182 115 209 91 226 109 244 97 259 113 278 93 301 104 325 84 348 99 375 89 397 103 421 91 450 108 475 90 493 109 512 97 530 110 552 96 581 104 608 87 632 102 662 83 694 98 722 85 747 100 778 86 810 97 841 77 870 96 895 84 923 106 948 88 974 103 999 89 1021 101 1043 80 1064 95 1089 79 1111 94 1139 76 1162 92 1181 82 1204 99 1231 81 1256 103 1278 89 1301 104 1322 88 1341 104 1364 91 1389 107 1412 92 1439 108 1462 93 1487 115 1511 101 1535 117 1565 109 1600 127V229H0Z" fill="#627667"/>
+          <path d="M0 166Q200 131 400 151T800 143T1200 138T1600 157V241H0Z" fill="#819075"/>
+          <path fill="url(#field)" d="M0 186h1600v430H0z"/>
+          <path d="m743 197 114 0 743 382H0Z" fill="url(#runway)"/>
+          <path d="m793 209 14 0 4 15h-22Zm-10 40h34l12 34h-58Zm-21 75h76l27 69H735Z" fill="#e7ddba" opacity=".7"/>
+          <path d="M0 258h670m263 0h667" stroke="#9d9e78" stroke-width="3" opacity=".55"/>
+          <g fill="#a6aa95" stroke="#6d8074" stroke-width="1"><path d="M37 150v-36l78-18 77 18v36Z"/><path d="M1352 147v-34l73-14 73 14v34Z"/></g>
+          <path d="M58 117h114v32H58Zm1316-1h102v30h-102Z" fill="#637b70"/>
+          <path d="M364 329Q490 213 800 203q310 10 436 126l78 146H286Z" fill="url(#nose)" stroke="#8f9d92" stroke-width="3"/>
+          <path d="m398 304 136-61 29 3-153 99Zm804 0-136-61-29 3 153 99Z" fill="#be5140"/>
+          <path d="M490 267Q800 153 1110 267" fill="none" stroke="#f7ebc5" stroke-width="3"/>
+          <path d="M314 0 45 661l295-226L529 0Z" fill="url(#glass-left)" stroke="#d4dac0" stroke-opacity=".3" stroke-width="2"/>
+          <path d="m1068 0 199 447 306 214L1285 0Z" fill="url(#glass-right)" stroke="#d4dac0" stroke-opacity=".3" stroke-width="2"/>
+          <path d="M340 0 85 602M1260 0l247 602" stroke="#e8e4bf" stroke-width="3" opacity=".22"/>
+          <path d="M573-10 529 246M1027-10l44 256" stroke="#324e4c" stroke-width="23"/>
+          <path d="M567-10 523 246M1033-10l44 256" stroke="#b9c2aa" stroke-width="3"/>
+          <path d="m568 39-4 21m-10 64-3 22m485-107 4 21m10 64 3 22" stroke="#d6d3b0" stroke-width="6"/>
+          <path id="night-sky" d="M0 0h1600v390H0Z" fill="#08202f" opacity="0"/>
+        </g>
+
+        <g id="upper-console" aria-hidden="true">
+          <path d="M500 305 510 139q2-20 24-20h101q13 0 14 21v21h302v-23q0-19 18-19h98q23 1 24 23l12 163Z" fill="url(#radio-face)" stroke="#89958a" stroke-width="3" filter="url(#shadow)"/>
+          <path d="M506 304h591" stroke="#121d21" stroke-width="10"/>
+          <use href="#small-screw" x="525" y="142"/><use href="#small-screw" x="1076" y="142"/><use href="#small-screw" x="524" y="281"/><use href="#small-screw" x="1080" y="281"/>
+          <g id="flight-clock" transform="translate(585 211)"></g>
+          <rect x="690" y="174" width="251" height="100" rx="5" fill="#121d20" stroke="#798078" stroke-width="2"/>
+          <g id="annunciators"></g>
+          <circle cx="1018" cy="217" r="46" fill="url(#bezel)"/><circle cx="1018" cy="217" r="35" fill="#182528"/>
+          <path d="M985 218h66" stroke="#9e9d57" stroke-width="1"/><path d="m999 209 19 7 19-7-8 12h-22Z" fill="#baae63"/><path d="M1018 190v46" stroke="#a3b687" stroke-width="1"/>
+          <text x="1018" y="246" class="stencil tiny" text-anchor="middle">КУРС</text>
+          <rect x="746" y="146" width="139" height="12" rx="2" fill="#a7aaa0" stroke="#3c514e"/><path d="M788 126v20h46v-20" fill="none" stroke="#7f8d83" stroke-width="5"/>
+        </g>
+
+        <g id="airframe" aria-hidden="true">
+          <path d="M-32 1000V727L288-44h74L66 777l-2 223Zm1664 0V727L1312-44h-74l296 821 2 223Z" fill="#1b2d32"/>
+          <path d="M-10 752 295-20h48L48 762l-1 238H-6Zm1620 0L1305-20h-48l295 782 1 238h53Z" fill="url(#canopy-metal)" stroke="#0e2027" stroke-width="5"/>
+          <path d="M17 724 308-14m1275 738L1292-14" stroke="#c0b99b" stroke-width="3"/>
+          <path d="m23 741 270-696m1284 696L1307 45" stroke="#84958b" stroke-width="2" opacity=".6"/>
+          <path d="M53 759 15 1000h102l62-325Zm1494 0 38 241h-102l-62-325Z" fill="url(#blue-metal)" stroke="#7a9190" stroke-width="3"/>
+          <path d="m0 843 101 157H0Zm1600 0-101 157h101Z" fill="#d9d8c0"/>
+          <path d="m22 848 86 146m1470-146-86 146" stroke="#b9bca9" stroke-width="9"/>
+          <g id="canopy-bolts"></g>
+          <path d="M100 773C212 435 466 282 800 282s588 153 700 491l45 227H55Z" fill="url(#blue-metal)"/>
+          <path d="M100 773C212 435 466 282 800 282s588 153 700 491l45 227H55Z" fill="url(#metal-grain)"/>
+          <path d="M102 774C214 436 468 283 800 283s586 153 698 491" fill="none" stroke="#0d1c23" stroke-width="39"/>
+          <path d="M102 766C214 428 468 275 800 275s586 153 698 491" fill="none" stroke="url(#rubber)" stroke-width="26"/>
+          <path d="M102 760C214 422 468 269 800 269s586 153 698 491" fill="none" stroke="#71817b" stroke-width="2"/>
+          <path d="M109 778C220 445 470 290 800 290s580 155 691 488" fill="none" stroke="#87938a" stroke-width="1.5" stroke-dasharray="3 7" opacity=".65"/>
+          <path d="M175 632q58-99 153-156l-15 434-171 90H78Z" fill="url(#side-panel)" stroke="#263f47" stroke-width="2"/>
+          <path d="M1425 632q-58-99-153-156l15 434 171 90h64Z" fill="url(#side-panel)" stroke="#263f47" stroke-width="2"/>
+          <path d="M351 485Q358 425 417 396Q596 313 800 319Q1004 313 1183 396Q1242 425 1249 485L1236 795Q1232 854 1175 857H425Q368 854 364 795Z" fill="url(#panel-edge)" transform="translate(0 6)" filter="url(#shadow)"/>
+          <path d="M351 485Q358 425 417 396Q596 313 800 319Q1004 313 1183 396Q1242 425 1249 485L1236 795Q1232 854 1175 857H425Q368 854 364 795Z" fill="url(#instrument-panel)" stroke="#9cafa0" stroke-width="2"/>
+          <path d="M351 485Q358 425 417 396Q596 313 800 319Q1004 313 1183 396Q1242 425 1249 485L1236 795Q1232 854 1175 857H425Q368 854 364 795Z" fill="url(#metal-grain)"/>
+          <g id="paint-wear" clip-path="url(#dashboard-clip)"></g>
+          <path d="m379 891 99 11 47-8h523l59 8 107-12" fill="none" stroke="#25454d" stroke-width="18"/>
+          <path d="M392 904h812" stroke="#759599" stroke-width="3"/>
+          <path d="M527 927q263-70 547 0l109 73H422Z" fill="url(#well)" stroke="#304b50" stroke-width="4"/>
+          <path d="m619 953 39 47m310-47-39 47M691 928l17 72m219-72-17 72" stroke="#40524d" stroke-width="9"/>
+          <path d="M723 1000v-72h167v72" fill="#243535" stroke="#101e22" stroke-width="4"/>
+          <g id="panel-screws"></g>
+        </g>
+
+        <g id="panel-furniture" aria-hidden="true">
+          <rect x="741" y="333" width="118" height="25" rx="2" fill="#172a2d" stroke="#87978b"/>
+          <text id="callsign-plate" x="800" y="350" text-anchor="middle" class="stencil registration">СПИЧКА · 052</text>
+          <rect x="708" y="379" width="176" height="194" rx="8" fill="#182d31" stroke="#253b40" stroke-width="6" filter="url(#shadow)"/>
+          <rect x="719" y="390" width="154" height="149" rx="4" fill="#081a20" stroke="#8b9d8e" stroke-width="2"/>
+          <path d="M729 403h134v121H729Z" fill="url(#lcd)"/>
+          <g stroke="#6b8e76" stroke-width=".5" opacity=".23"><path d="M741 404v120m17-120v120m17-120v120m17-120v120m17-120v120m17-120v120m17-120v120M730 420h132m-132 19h132m-132 19h132m-132 19h132m-132 19h132m-132 19h132"/></g>
+          <text x="796" y="425" text-anchor="middle" class="monitor-heading">ПРОТОКОЛ ПИЛОТА</text>
+          <text id="monitor-stat" x="796" y="451" text-anchor="middle" class="monitor-label">ПОДВИЖНОСТЬ</text>
+          <text id="monitor-value" x="796" y="491" text-anchor="middle" class="monitor-value">03</text>
+          <text id="monitor-instrument" x="796" y="516" text-anchor="middle" class="monitor-heading">СКОРОСТЬ</text>
+          <rect x="734" y="550" width="13" height="11" rx="1" fill="#78978b"/><rect x="759" y="550" width="13" height="11" rx="1" fill="#263f3f" stroke="#718c7e"/>
+          <text x="851" y="559" text-anchor="end" class="stencil tiny">БК–52</text>
+          <use href="#small-screw" x="718" y="382"/><use href="#small-screw" x="874" y="382"/><use href="#small-screw" x="718" y="570"/><use href="#small-screw" x="874" y="570"/>
+          <rect x="411" y="386" width="78" height="44" rx="3" fill="#203a3b" stroke="#7e958a" stroke-width="2"/><rect x="419" y="394" width="62" height="27" fill="url(#lcd)"/>
+          <text x="450" y="414" text-anchor="middle" class="lcd-text">24.0</text><text x="450" y="441" text-anchor="middle" class="stencil tiny">БОРТ. НАПРЯЖЕНИЕ</text>
+          <g id="decorative-gauges"></g>
+          <rect x="689" y="754" width="67" height="67" rx="3" fill="#16292d" stroke="#7a9186"/><text x="722" y="769" text-anchor="middle" class="stencil micro">ХАРАКТЕРИСТИКИ</text><text id="points-counter" x="722" y="793" text-anchor="middle" class="counter-text">24 / 24</text><text id="points-label" x="722" y="809" text-anchor="middle" class="stencil micro">ОЧКА РАСПРЕДЕЛЕНО</text>
+          <rect x="1113" y="603" width="95" height="179" rx="6" fill="#1b3237" stroke="#8a9b8d" stroke-width="2"/>
+          <rect x="1121" y="613" width="78" height="158" fill="#263e3e" stroke="#10252b" stroke-width="2"/>
+          <g id="hp-segments"></g>
+          <path d="M1159 609v166" stroke="#b5c3ac" stroke-width="2"/>
+          <text x="1160" y="796" text-anchor="middle" class="stencil tiny">РЕСУРС ПИЛОТА</text>
+          <use href="#small-screw" x="1121" y="611"/><use href="#small-screw" x="1199" y="611"/><use href="#small-screw" x="1121" y="774"/><use href="#small-screw" x="1199" y="774"/>
+          <g transform="translate(1313 650)"><circle r="45" fill="#20383d" stroke="#a5af96" stroke-width="2"/><path d="M-28-29q28-20 56 0M-35 4h70" stroke="#bdc6ad" stroke-width="1" fill="none"/><text y="-12" text-anchor="middle" class="stencil tiny">СЕТЬ</text><use href="#rotary-knob" transform="rotate(20)"/><text y="34" text-anchor="middle" class="stencil micro">ВКЛ.</text></g>
+          <rect x="1258" y="716" width="140" height="104" rx="7" fill="url(#radio-face)" stroke="#849187" stroke-width="2"/>
+          <text x="1328" y="733" text-anchor="middle" class="stencil tiny">СПУ–9</text>
+          <use href="#rotary-knob" x="1290" y="762"/><use href="#rotary-knob" x="1364" y="762"/>
+          <circle cx="1290" cy="801" r="9" fill="#172c32" stroke="#b3ad80" stroke-width="3"/><circle cx="1364" cy="801" r="9" fill="#172c32" stroke="#b3ad80" stroke-width="3"/>
+          <text x="1328" y="796" text-anchor="middle" class="stencil micro">РАДИО</text>
+          <g transform="translate(298 538) rotate(12)"><circle r="17" fill="url(#steel)" stroke="#1d383e" stroke-width="3"/><rect x="-8" y="-3" width="16" height="75" rx="5" fill="url(#steel)"/><rect x="-73" y="40" width="105" height="21" rx="9" fill="url(#red-handle)" stroke="#562923" stroke-width="2"/><path d="M-62 44h74" stroke="#e77c59" stroke-width="2" opacity=".5"/></g>
+          <path d="M284 755v111" stroke="#1c3031" stroke-width="17"/><path d="M282 757v103" stroke="#a6a78d" stroke-width="8"/>
+          <use href="#rotary-knob" x="284" y="870"/><text x="284" y="906" text-anchor="middle" class="stencil tiny">ШАГ ВИНТА</text>
+          <rect x="173" y="733" width="59" height="29" rx="3" fill="#243c40" stroke="#8c9b8a"/><circle cx="187" cy="747" r="8" fill="#401c1a" stroke="#af8973" stroke-width="2"/><circle cx="217" cy="747" r="8" fill="#17312d" stroke="#94a98b" stroke-width="2"/>
+          <use href="#toggle" x="180" y="797"/><use href="#toggle" x="220" y="797"/><text x="199" y="837" text-anchor="middle" class="stencil tiny">ЗАЖИГАНИЕ</text>
+          <use href="#rotary-knob" x="184" y="915"/><text x="184" y="949" text-anchor="middle" class="stencil tiny">ОБОГРЕВ</text>
+          <path d="M140 868h85M141 873h56" stroke="#b5bd9e" stroke-width="2" opacity=".6"/>
+          <text x="384" y="879" class="stencil tiny">ЯК–52</text><text x="1208" y="879" text-anchor="end" class="stencil tiny">НЕ НАЖИМАТЬ НА СТЕКЛО</text>
+          <g id="control-stick" transform="translate(801 988)"><path d="M-15 35-11-50h22l4 85" fill="url(#steel)" stroke="#0b1b20" stroke-width="5"/><path d="M-20-46q-13-11-10-43l5-47q1-16 19-17h16q21 1 21 20l-2 46q-3 30-17 41Z" fill="url(#knob)" stroke="#0b171b" stroke-width="4"/><path d="M-20-113h39v58h-39Z" fill="url(#grip)"/><path d="M-21-126q20-16 42 0" fill="none" stroke="#63716b" stroke-width="3"/><ellipse cx="14" cy="-139" rx="10" ry="6" fill="#a43f32" stroke="#e48e64" stroke-width="1"/><path d="M-16-109v42" stroke="#6c7971" stroke-opacity=".4" stroke-width="2"/></g>
+        </g>
+
+        <g id="flight-instruments"></g>
+        <g id="resource-radio" transform="translate(1232 844)">
+          <rect width="240" height="139" rx="6" fill="url(#radio-face)" stroke="#0c232b" stroke-width="5" filter="url(#shadow)"/>
+          <rect x="7" y="6" width="226" height="126" rx="3" fill="none" stroke="#71877d"/>
+          <use href="#small-screw" x="14" y="14"/><use href="#small-screw" x="225" y="14"/><use href="#small-screw" x="14" y="124"/><use href="#small-screw" x="225" y="124"/>
+          <text x="24" y="28" class="stencil tiny">ЗДОРОВЬЕ</text><text x="24" y="85" class="stencil tiny">ОЧКИ УДАЧИ</text>
+          <rect x="22" y="34" width="129" height="34" rx="3" fill="url(#lcd)" stroke="#0b191e" stroke-width="2"/>
+          <rect x="22" y="91" width="129" height="31" rx="3" fill="url(#lcd)" stroke="#0b191e" stroke-width="2"/>
+          <text id="hp-readout" x="87" y="59" text-anchor="middle" class="resource-value">08 / 08</text><text id="luck-readout" x="87" y="115" text-anchor="middle" class="resource-value">01 / 01</text>
+          <g class="resource-button" role="button" tabindex="0" data-resource="hp" data-delta="-1" aria-label="Уменьшить здоровье"><rect x="164" y="35" width="27" height="32" rx="3"/><text x="177.5" y="57">−</text></g>
+          <g class="resource-button" role="button" tabindex="0" data-resource="hp" data-delta="1" aria-label="Увеличить здоровье"><rect x="196" y="35" width="27" height="32" rx="3"/><text x="209.5" y="57">+</text></g>
+          <g class="resource-button" role="button" tabindex="0" data-resource="luck" data-delta="-1" aria-label="Потратить очко удачи"><rect x="164" y="91" width="27" height="31" rx="3"/><text x="177.5" y="113">−</text></g>
+          <g class="resource-button" role="button" tabindex="0" data-resource="luck" data-delta="1" aria-label="Восстановить очко удачи"><rect x="196" y="91" width="27" height="31" rx="3"/><text x="209.5" y="113">+</text></g>
+        </g>
+      </svg>
+      <div class="scene-corner"><span>052</span><span>ЯК–52 · УЧЕБНО-ТРЕНИРОВОЧНЫЙ</span></div>
+    </div>
+    <footer class="flight-strip">
+      <span class="interaction-hint"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 14 7-7m-7 0v7h7M4 4h12v12"/></svg> Тяните стрелки приборов</span>
+      <span class="selected-stat" id="selected-stat">Подвижность <span>· Скорость</span></span>
+      <span class="save-status" id="save-status" role="status"><span class="live-dot"></span> Бортовой журнал сохранён</span>
+    </footer>
+  </main>
+
+  <dialog id="logbook" aria-labelledby="logbook-title">
+    <form method="dialog" class="book-header"><div><span class="eyebrow">ЛИЧНОЕ ДЕЛО · 052</span><h1 id="logbook-title">Лётная книжка</h1></div><button class="close-button" aria-label="Закрыть лётную книжку">×</button></form>
+    <div class="book-content">
+      <div class="pilot-fields"><label>Имя / Позывной<input id="pilot-name" autocomplete="off" maxlength="80" placeholder="Имя / Позывной"></label><label>Фракция / Биография<textarea id="pilot-bio" rows="2" placeholder="Фракция, история персонажа…"></textarea></label></div>
+      <div class="section-heading"><h2>Характеристики</h2><span id="allocation-status">24 / 24 очка</span></div>
+      <p class="book-hint">Всего 24 очка. Каждая характеристика — от 1 до 5.</p>
+      <div id="stat-fields" class="stat-fields"></div>
+      <div class="section-heading resources-heading"><h2>Ресурсы состояния</h2></div>
+      <div class="resource-fields"><label>Здоровье пилота<span class="resource-input"><input id="hp-current" type="number" min="0" aria-label="Текущее здоровье"> <span>/ <output id="hp-max">8</output></span></span><small>Жизненность × 2</small></label><label>Очки удачи<span class="resource-input"><input id="luck-current" type="number" min="0" aria-label="Текущие очки удачи"> <span>/ <output id="luck-max">1</output></span></span><small>Максимум равен Удаче</small></label></div>
+      <label class="notes-label">Бортовые заметки<textarea id="pilot-notes" rows="3" placeholder="Записи о вылетах, снаряжение, приметы…"></textarea></label>
+      <div class="book-bottom"><span id="book-save-status">Сохраняется на этом устройстве</span><button id="reset-button" type="button">Очистить журнал</button></div>
+    </div>
+  </dialog>
+</body>
+</html>

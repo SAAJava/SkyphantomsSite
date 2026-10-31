@@ -37,3 +37,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Local SKYPHANTOMS previews and generated files ###
+/artifacts/
+/tmp/
+/_site/
+/.idea/
+__pycache__/

@@ -179,9 +179,22 @@
 
           <linearGradient id="propeller-metal" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#101814"/><stop offset=".25" stop-color="#424a3d"/><stop offset=".46" stop-color="#8d947a"/><stop offset=".58" stop-color="#414b3d"/><stop offset="1" stop-color="#111b16"/></linearGradient>
           <radialGradient id="spinner-cone" cx=".32" cy=".23"><stop stop-color="#c9c7aa"/><stop offset=".3" stop-color="#7e8a70"/><stop offset=".76" stop-color="#344738"/><stop offset="1" stop-color="#192b23"/></radialGradient>
-          <linearGradient id="cowling-olive" x2=".2" y2="1"><stop stop-color="#9f9d7c"/><stop offset=".25" stop-color="#778266"/><stop offset=".64" stop-color="#4b604b"/><stop offset="1" stop-color="#283e35"/></linearGradient>
-          <linearGradient id="stick-leather" x2="1" y2=".3"><stop stop-color="#171f19"/><stop offset=".3" stop-color="#514e39"/><stop offset=".55" stop-color="#343b2b"/><stop offset="1" stop-color="#101d17"/></linearGradient>
-          <clipPath id="cowl-clip"><path d="M344 357Q450 274 677 245Q732 211 800 211Q868 211 923 245Q1150 274 1256 357L1312 474H288Z"/></clipPath>
+          <linearGradient id="cowling-olive" gradientUnits="userSpaceOnUse" x1="380" y1="235" x2="1130" y2="442"><stop stop-color="#596056"/><stop offset=".22" stop-color="#787c6d"/><stop offset=".43" stop-color="#697164"/><stop offset=".7" stop-color="#454f43"/><stop offset="1" stop-color="#252f2b"/></linearGradient>
+          <radialGradient id="cowling-sky-reflection" cx=".43" cy=".08" r=".76"><stop stop-color="#d5d6c9" stop-opacity=".34"/><stop offset=".28" stop-color="#a8b7b2" stop-opacity=".15"/><stop offset=".65" stop-color="#91a29c" stop-opacity=".025"/><stop offset="1" stop-color="#91a29c" stop-opacity="0"/></radialGradient>
+          <linearGradient id="cowling-crown" gradientUnits="userSpaceOnUse" x1="615" y1="260" x2="978" y2="305"><stop stop-color="#424c41" stop-opacity=".5"/><stop offset=".26" stop-color="#b4b5a1" stop-opacity=".12"/><stop offset=".48" stop-color="#d0d1bf" stop-opacity=".2"/><stop offset=".75" stop-color="#6a7362" stop-opacity=".07"/><stop offset="1" stop-color="#17241f" stop-opacity=".5"/></linearGradient>
+          <radialGradient id="cowling-patina"><stop stop-color="#383829" stop-opacity=".26"/><stop offset=".45" stop-color="#454635" stop-opacity=".1"/><stop offset="1" stop-color="#454635" stop-opacity="0"/></radialGradient>
+          <linearGradient id="cowling-louvre" x2="0" y2="1"><stop stop-color="#111a17"/><stop offset=".52" stop-color="#253029"/><stop offset="1" stop-color="#596154"/></linearGradient>
+          <radialGradient id="cowling-spinner" cx=".35" cy=".23" r=".8"><stop stop-color="#adb1a6"/><stop offset=".2" stop-color="#858e83"/><stop offset=".47" stop-color="#576459"/><stop offset=".8" stop-color="#303e36"/><stop offset="1" stop-color="#1d2b25"/></radialGradient>
+          <filter id="cowling-paint-finish" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".72 .54" numOctaves="2" seed="29" result="paint-grain"/><feColorMatrix in="paint-grain" type="saturate" values="0" result="paint-grey"/><feComponentTransfer in="paint-grey" result="paint-fine-grain"><feFuncA type="linear" slope=".17"/></feComponentTransfer><feBlend in="SourceGraphic" in2="paint-fine-grain" mode="soft-light"/></filter>
+          <filter id="cowling-stain-soft" x="-.1" y="-.2" width="1.2" height="1.4"><feGaussianBlur stdDeviation="1.8"/></filter>
+          <g id="cowling-fastener"><ellipse cy=".7" rx="2.4" ry="1.5" fill="#18231e" opacity=".65"/><ellipse rx="2" ry="1.2" fill="#969b8a" opacity=".64"/><path d="m-1.2.35 2.4-.7" stroke="#354237" stroke-width=".65"/></g>
+          <g id="cowling-louvres"><path d="M0 0Q57-5 121 0L119 3Q57-1 2 3ZM5 9Q58 5 116 9L114 12Q58 9 7 12ZM11 18Q60 15 110 18L108 21Q60 18 13 21Z" fill="url(#cowling-louvre)"/><path d="M2 3Q57-1 119 3M7 12Q58 9 114 12M13 21Q60 18 108 21" fill="none" stroke="#afb29d" stroke-opacity=".29" stroke-width=".7"/><path d="M-5-4Q57-10 126-4" fill="none" stroke="#29382d" stroke-opacity=".55" stroke-width=".6"/></g>
+          <linearGradient id="control-column-metal" x1="0" y1=".4" x2="1" y2=".5"><stop stop-color="#19231f"/><stop offset=".2" stop-color="#63716b"/><stop offset=".36" stop-color="#a6aea0"/><stop offset=".5" stop-color="#738177"/><stop offset=".72" stop-color="#3c4c43"/><stop offset="1" stop-color="#1a2921"/></linearGradient>
+          <linearGradient id="control-yoke-metal" x1=".2" y1="0" x2=".65" y2="1"><stop stop-color="#929a8e"/><stop offset=".16" stop-color="#626e61"/><stop offset=".47" stop-color="#3b4a40"/><stop offset=".73" stop-color="#2e3b33"/><stop offset="1" stop-color="#151f1b"/></linearGradient>
+          <linearGradient id="control-grip-bakelite" x1="0" y1=".15" x2="1" y2=".4"><stop stop-color="#111714"/><stop offset=".2" stop-color="#343b32"/><stop offset=".36" stop-color="#484b3c"/><stop offset=".55" stop-color="#292f26"/><stop offset="1" stop-color="#101813"/></linearGradient>
+          <linearGradient id="control-boot-leather" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#615643"/><stop offset=".28" stop-color="#40392c"/><stop offset=".56" stop-color="#2c2b22"/><stop offset="1" stop-color="#151e18"/></linearGradient>
+          <radialGradient id="control-yoke-boss" cx=".35" cy=".2" r=".85"><stop stop-color="#8d9484"/><stop offset=".25" stop-color="#63705e"/><stop offset=".6" stop-color="#394a3b"/><stop offset="1" stop-color="#1c2b21"/></radialGradient>
+          <clipPath id="cowl-clip"><path d="M309 395C417 311 570 257 696 222C728 212 766 207 800 207C834 207 872 212 904 222C1030 257 1183 311 1291 395L1336 486H264Z"/></clipPath>
           <clipPath id="blade-surface-clip"><path d="M-10-18C-20-70-37-132-39-192-41-239-31-279-16-285-4-291 9-267 14-231 24-157 25-76 10-18Z"/></clipPath>
           <clipPath id="instrument-face-clip"><path d="M351 485Q358 425 417 396Q550 332 600 319H1000Q1100 332 1183 396Q1242 425 1249 485L1236 862Q1232 891 1175 894H425Q368 891 364 862Z"/></clipPath>
         </defs>
@@ -212,26 +225,59 @@
   <g class="main-propeller-rotor"><circle r="291" fill="none"/><use href="#main-propeller-blade-shape"/><use href="#main-propeller-blade-shape" transform="rotate(120)"/><use href="#main-propeller-blade-shape" transform="rotate(240)"/></g>
 </g>
 <g id="aircraft-nose" aria-hidden="true">
-  <path d="M344 357Q450 274 677 245Q732 211 800 211Q868 211 923 245Q1150 274 1256 357L1312 474H288Z" fill="url(#cowling-olive)" stroke="#263f32" stroke-width="2"/>
+  <path d="M309 395C417 311 570 257 696 222C728 212 766 207 800 207C834 207 872 212 904 222C1030 257 1183 311 1291 395L1336 486H264Z" fill="url(#cowling-olive)" filter="url(#cowling-paint-finish)"/>
   <g clip-path="url(#cowl-clip)">
-    <path d="M344 357Q450 274 677 245Q732 211 800 211Q868 211 923 245Q1150 274 1256 357" fill="none" stroke="#c5b995" stroke-width="6"/>
-    <path d="M665 246q135-32 270 0l35 186H630Z" fill="#677659" stroke="#263e2e" stroke-width="2"/>
-    <path d="M690 246q110-24 220 0m-191-6-25 170m187-170 25 170" fill="none" stroke="#b3b38c" stroke-width="1.4"/>
-    <path d="M424 303q53-29 147-45l25 111-167 53Z" fill="#526649" stroke="#263c2d" stroke-width="2"/>
-    <path d="M1176 303q-53-29-147-45l-25 111 167 53Z" fill="#526649" stroke="#263c2d" stroke-width="2"/>
-    <path d="M449 310q45-21 102-33m-97 48q44-21 101-33m-98 48q44-21 101-33m593-15q-45-21-102-33m97 48q-44-21-101-33m98 48q-44-21-101-33" stroke="#172f25" stroke-width="7" fill="none"/>
-    <path d="M432 298q55-29 137-44m462 0q82 15 137 44M655 249l-29 171m319-171 29 171" stroke="#b09b70" stroke-width="1" stroke-dasharray="2 12" fill="none"/>
-    <path d="M603 268l-29 104m423-104 29 104" stroke="#9c6c43" stroke-width="4"/><path d="M603 268l-29 104m423-104 29 104" stroke="#3b4c37" stroke-width="2"/>
-    <path d="M377 340q194-82 423-79t423 79" stroke="#102d23" stroke-width="2" fill="none"/>
-    <path d="M344 357Q450 274 677 245Q732 211 800 211Q868 211 923 245Q1150 274 1256 357L1312 474H288Z" fill="url(#metal-grain)"/>
-    <path d="m451 294 18-4m93-29 15-2m491 0 13 4m73 25 21 7m-443-54 21-3m98 0 19 3" stroke="#d0c19b" stroke-width="2"/>
+    <path d="M264 204H1336V486H264Z" fill="url(#cowling-sky-reflection)"/>
+    <path d="M751 211C712 247 665 335 624 478H976C935 335 888 247 849 211Q800 203 751 211Z" fill="url(#cowling-crown)"/>
+    <path d="M309 395C417 311 570 257 696 222C728 212 766 207 800 207C834 207 872 212 904 222C1030 257 1183 311 1291 395" fill="none" stroke="#c3c8ba" stroke-opacity=".6" stroke-width="1.25"/>
+    <path d="M313 398C421 314 573 260 697 225C730 215 766 210 800 210C834 210 870 215 903 225C1027 260 1179 314 1287 398" fill="none" stroke="#26332a" stroke-opacity=".28" stroke-width="1.1"/>
+
+    <g fill="none" stroke-linecap="round">
+      <path d="M733 216C690 259 649 342 613 478M867 216C910 259 951 342 987 478" stroke="#1d2a23" stroke-opacity=".66" stroke-width="1.2"/>
+      <path d="M735 216C692 259 651 342 615 478M869 216C912 259 953 342 989 478" stroke="#c1c4b2" stroke-opacity=".26" stroke-width=".75"/>
+      <path d="M397 341C539 280 682 252 800 251C918 252 1061 280 1203 341" stroke="#1c2922" stroke-opacity=".68" stroke-width="1.3"/>
+      <path d="M398 343C540 282 682 254 800 253C918 254 1060 282 1202 343" stroke="#c3c5b3" stroke-opacity=".28" stroke-width=".65"/>
+      <path d="M565 260C547 284 525 324 507 372M1035 260C1053 284 1075 324 1093 372" stroke="#263329" stroke-opacity=".62" stroke-width=".8"/>
+      <path d="M567 261C549 285 527 325 509 373M1037 261C1055 285 1077 325 1095 373" stroke="#b3b9a7" stroke-opacity=".22" stroke-width=".6"/>
+    </g>
+
+    <ellipse cx="664" cy="258" rx="101" ry="24" fill="url(#cowling-patina)" transform="rotate(-12 664 258)"/>
+    <ellipse cx="942" cy="265" rx="84" ry="31" fill="url(#cowling-patina)" transform="rotate(13 942 265)"/>
+    <ellipse cx="1125" cy="325" rx="81" ry="37" fill="url(#cowling-patina)"/>
+    <g filter="url(#cowling-stain-soft)" fill="none" stroke-linecap="round">
+      <path d="M939 263q13 17 37 29t47 22M928 269q8 20 35 33t39 24" stroke="#1f2921" stroke-opacity=".18" stroke-width="7"/>
+      <path d="M577 279q-26 17-53 48m159-88q-12 15-23 35" stroke="#403f2d" stroke-opacity=".19" stroke-width="4"/>
+      <path d="M763 236q-8 12-17 26m91-26q10 16 27 27" stroke="#202a22" stroke-opacity=".15" stroke-width="5"/>
+    </g>
+
+    <use href="#cowling-louvres" transform="translate(442 316) rotate(-20) scale(1 .7)"/>
+    <use href="#cowling-louvres" transform="translate(1158 316) rotate(20) scale(-1 .7)"/>
+    <g>
+      <use href="#cowling-fastener" x="438" y="326"/><use href="#cowling-fastener" x="493" y="303"/><use href="#cowling-fastener" x="548" y="286"/><use href="#cowling-fastener" x="603" y="272"/>
+      <use href="#cowling-fastener" x="661" y="262"/><use href="#cowling-fastener" x="717" y="257"/><use href="#cowling-fastener" x="883" y="257"/><use href="#cowling-fastener" x="939" y="262"/>
+      <use href="#cowling-fastener" x="997" y="272"/><use href="#cowling-fastener" x="1052" y="286"/><use href="#cowling-fastener" x="1107" y="303"/><use href="#cowling-fastener" x="1162" y="326"/>
+      <use href="#cowling-fastener" x="717" y="238"/><use href="#cowling-fastener" x="695" y="268"/><use href="#cowling-fastener" x="883" y="238"/><use href="#cowling-fastener" x="905" y="268"/>
+    </g>
+    <g fill="#b6b8a5" opacity=".52">
+      <path d="m648 240 6-1-1 1-3 1Zm29-9 4-1-1 1-4 1Zm-177 55 5-2 3 1-6 1Zm238-48 1 4-2 3v-4Zm152-17 4 1 2 2-3-1Zm162 54 7 3-4-1-2 1Zm103 43 5 3-1 1-5-3Z"/>
+      <path d="m612 279 4-2 2 1-4 1Zm85-15 2 1-1 4h-1Zm210 4 2 1 1 4-2-1Zm159 30 6 2-2 1-4-2Z" opacity=".6"/>
+    </g>
+    <g fill="none" stroke-linecap="round">
+      <path d="m615 267-9 4m16-4-5 3m86-20-3 4m196 10 5 2m94 27 12 4m-465 8-14 5" stroke="#d1d0bc" stroke-opacity=".21" stroke-width=".55"/>
+      <path d="m619 267-8 5m291-6 8 4m-372 36-7 3" stroke="#26352a" stroke-opacity=".35" stroke-width=".6"/>
+    </g>
+    <path d="M748 248Q800 232 852 248L873 280Q800 258 727 280Z" fill="#18241e" opacity=".15"/>
   </g>
-  <path d="M780 228h40l12 36h-64Z" fill="url(#gunmetal)" stroke="#2b3e2e" stroke-width="2"/>
+  <path d="M768 225Q772 207 800 207T832 225L835 241Q800 252 765 241Z" fill="url(#cowling-olive)"/>
+  <path d="M770 227Q774 210 800 210T830 227" fill="none" stroke="#c1c7b6" stroke-opacity=".3" stroke-width=".8"/>
 </g>
 <g id="propeller-hub" transform="translate(800 228)" aria-hidden="true">
-  <ellipse cy="6" rx="34" ry="29" fill="#1c3227" stroke="#999f7e" stroke-width="2"/>
-  <circle r="26" fill="url(#steel)" stroke="#1b3024" stroke-width="2"/><circle r="21" fill="url(#spinner-cone)" stroke="#73836a"/><ellipse cx="-5" cy="-7" rx="6" ry="9" fill="#d2cfad" opacity=".25"/>
-  <path d="m-22-8 3-7m35-2 6 6m0 24-7 6m-35-2-3-7" stroke="#b8b48e" stroke-width="2"/>
+  <ellipse cy="7" rx="32" ry="23" fill="#18251e" opacity=".55"/>
+  <ellipse cy="2" rx="29" ry="25" fill="#3d4b40" stroke="#18271f" stroke-width="1"/>
+  <ellipse cy="1" rx="26" ry="23" fill="url(#cowling-spinner)" filter="url(#cowling-paint-finish)"/>
+  <path d="M-25 5C-24-10-15-20-3-21" fill="none" stroke="#d4d6c6" stroke-opacity=".46" stroke-width=".8"/>
+  <path d="M-22 13Q0 26 22 13" fill="none" stroke="#16261e" stroke-opacity=".5" stroke-width="1.2"/>
+  <path d="m-23-3 1-3m36-12 3 2m8 20-1 3m-37 13-3-2" stroke="#bdc0ac" stroke-opacity=".33" stroke-width=".7"/>
 </g>
 
         <g id="windshield">
@@ -396,11 +442,57 @@
         </g>
         
         
-<g id="control-stick" class="control-stick" transform="translate(800 1020)" tabindex="0" role="group" aria-label="Ручка управления. Стрелки меняют курс и тангаж. Двойной щелчок или пробел выравнивает горизонт.">
-  <title>Удерживайте ручку для разворота. Двойной щелчок / пробел — выровнять горизонт.</title>
-  <g aria-hidden="true"><ellipse cy="-25" rx="40" ry="14" fill="#10241a" stroke="#65735a" stroke-width="3"/><path d="M-35-25h70m-67 6h64m-60 6h56m-51 6h46" stroke="#344a35" stroke-width="4"/></g>
-  <g id="stick-moving"><path d="M-10-22v-57h20v57" fill="url(#steel)" stroke="#18291d" stroke-width="3"/><path d="M-17-71q-14-8-12-31l4-29q2-17 17-17h15q20 1 21 18l-3 32q-2 22-16 29Z" fill="url(#stick-leather)" stroke="#10261a" stroke-width="3"/><path d="M-17-132q15-9 31 0m-36 9 38 2m-39 9 38 2m-38 8 37 2m-35 8 32 2" fill="none" stroke="#a39569" stroke-opacity=".35" stroke-width="1.2"/><path d="M-19-130v37" stroke="#121e13" stroke-width="2" stroke-dasharray="2 3"/><path d="M21-123q16 1 16 18t-16 18" fill="none" stroke="url(#steel)" stroke-width="5"/><rect x="7" y="-145" width="14" height="8" rx="3" fill="url(#red-handle)" stroke="#2f3827"/><path d="M-6-74v29q-1 8 11 12" fill="none" stroke="#142c1b" stroke-width="5"/></g>
-  <rect class="stick-focus" x="-43" y="-145" width="88" height="151" rx="23"/><rect class="stick-hit" x="-45" y="-144" width="92" height="151" rx="23"/>
+<g id="control-stick" class="control-stick" transform="translate(800 1000)" tabindex="0" role="group" aria-label="Штурвал. Потяните для изменения курса и тангажа или используйте стрелки. Двойной щелчок или пробел выравнивает горизонт.">
+  <title>Штурвал: потяните в сторону для разворота, вперёд или назад — для тангажа. Двойной щелчок / пробел — выровнять горизонт.</title>
+  <g id="control-stick-mount" aria-hidden="true">
+    <ellipse cy="-12" rx="57" ry="12" fill="#0d1a14" opacity=".8"/>
+    <path d="M-51-17C-51-29 51-29 51-17V-12C51 2-51 2-51-12Z" fill="url(#control-yoke-metal)" stroke="#14271c" stroke-width="1"/>
+    <ellipse cy="-18" rx="51" ry="12" fill="#344339" stroke="#7c8872" stroke-width=".8"/>
+    <ellipse cy="-18" rx="39" ry="8.5" fill="#111e17"/>
+    <path d="M-47-15Q0-2 47-15" fill="none" stroke="#b0b49b" stroke-opacity=".27" stroke-width=".8"/>
+    <g fill="#7d8774" stroke="#15281a" stroke-width=".8"><ellipse cx="-44" cy="-18" rx="3.1" ry="1.7"/><ellipse cx="44" cy="-18" rx="3.1" ry="1.7"/><ellipse cx="-23" cy="-27" rx="2.7" ry="1.4"/><ellipse cx="23" cy="-27" rx="2.7" ry="1.4"/></g>
+    <path d="M-45-18h2m86 0h2m-69-9h2m44 0h2" stroke="#283a29" stroke-width=".7"/>
+  </g>
+  <g id="stick-moving" aria-hidden="true">
+    <path d="M-10-34C-12-51-6-65 4-74C11-81 12-87 4-95L19-103C35-85 25-71 15-61C8-53 8-44 10-34Z" fill="url(#control-column-metal)" stroke="#172a1d" stroke-width="1.2"/>
+    <path d="M-5-37C-7-51-2-62 8-71C19-82 19-87 12-96" fill="none" stroke="#c4c8b9" stroke-opacity=".48" stroke-width="1.1"/>
+    <path d="M16-100C28-85 21-73 11-64" fill="none" stroke="#13261a" stroke-opacity=".52" stroke-width="1.5"/>
+    <path d="M-15-49Q-25-37-35-30L-40-18C-27-7 27-7 40-18L35-30Q25-37 15-49Z" fill="url(#control-boot-leather)" stroke="#17261a" stroke-width="1.1"/>
+    <path d="M-17-45Q0-37 17-45M-23-38Q0-28 23-38M-30-30Q0-18 30-30M-36-21Q0-9 36-21" fill="none" stroke="#171e15" stroke-opacity=".8" stroke-width="2.2"/>
+    <path d="M-17-43Q0-35 17-43M-24-35Q0-25 24-35M-31-27Q0-16 31-27M-36-18Q0-7 36-18" fill="none" stroke="#a09271" stroke-opacity=".28" stroke-width=".8"/>
+    <path d="M23-39 32-23" fill="none" stroke="#c0a77d" stroke-opacity=".3" stroke-width=".6" stroke-dasharray="1.6 2"/>
+    <ellipse cy="-48" rx="16" ry="5" fill="url(#control-column-metal)" stroke="#16291c" stroke-width=".8"/>
+    <ellipse cy="-49" rx="10" ry="2.4" fill="#526452"/>
+
+    <path d="M-66-133C-80-118-80-91-67-76C-57-65-43-62-25-67L-10-75Q0-79 10-75L25-67C43-62 57-65 67-76C80-91 80-118 66-133L54-127C62-115 62-100 55-92C44-88 28-92 12-99Q0-104-12-99C-28-92-44-88-55-92C-62-100-62-115-54-127Z" fill="url(#control-yoke-metal)" stroke="#14281b" stroke-width="1.5" filter="url(#cowling-paint-finish)"/>
+    <path d="M-67-126C-77-106-72-85-61-78C-49-70-36-71-25-76L-10-82Q0-87 10-82L25-76C36-71 49-70 61-78C72-85 77-106 67-126" fill="none" stroke="#a2ab96" stroke-opacity=".43" stroke-width="1.1"/>
+    <path d="M-53-92C-36-90-25-96-12-101Q0-106 12-101C25-96 36-90 53-92" fill="none" stroke="#10251a" stroke-opacity=".7" stroke-width="1"/>
+    <path d="m-48-71 7 1m12-2 4-1m51 0 6 2m20-2 5-3" fill="none" stroke="#b1b39b" stroke-opacity=".45" stroke-width=".8"/>
+
+    <g id="control-yoke-grips">
+      <path d="M-66-134C-74-132-79-118-78-107L-76-96Q-75-91-69-90L-59-93C-56-95-57-100-58-105C-61-113-58-122-55-127Q-56-134-66-134Z" fill="url(#control-grip-bakelite)" stroke="#101f15" stroke-width="1.1"/>
+      <path d="M66-134C74-132 79-118 78-107L76-96Q75-91 69-90L59-93C56-95 57-100 58-105C61-113 58-122 55-127Q56-134 66-134Z" fill="url(#control-grip-bakelite)" stroke="#101f15" stroke-width="1.1"/>
+      <path d="M-70-128Q-76-115-73-100M62-128Q72-115 69-98" fill="none" stroke="#a4a18a" stroke-opacity=".35" stroke-width="1.2"/>
+      <path d="M-76-119q6 4 15 3m-17 5q7 4 17 3m-16 5q7 4 17 2m136-18q-6 4-15 3m17 5q-7 4-17 3m16 5q-7 4-17 2" fill="none" stroke="#121f14" stroke-width="1.2"/>
+      <path d="M-75-117q6 3 14 2m-16 6q7 3 15 2m124-10q6 3 12 1m-13 7q7 3 13 1" fill="none" stroke="#888974" stroke-opacity=".22" stroke-width=".6"/>
+      <path d="m-74-121 1-4m1 23 2 5m140-14-1-5m-4-13-1-1" stroke="#a9a58d" stroke-opacity=".28" stroke-width=".65"/>
+      <ellipse cx="-62" cy="-131" rx="7" ry="3.5" fill="#3b4636" stroke="#182a1b" stroke-width=".8"/>
+      <ellipse cx="-62" cy="-132" rx="4.5" ry="2.5" fill="#934b38"/>
+      <path d="m-64-133 3-.4" stroke="#cea28a" stroke-opacity=".55" stroke-width=".7"/>
+      <ellipse cx="62" cy="-131" rx="6.5" ry="3.2" fill="#7d8773" stroke="#20331e" stroke-width=".8"/>
+      <path d="M-56-121Q-44-117-49-105L-53-98" fill="none" stroke="#17271c" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M-55-121Q-47-117-51-107" fill="none" stroke="#9a9f87" stroke-opacity=".48" stroke-width="1" stroke-linecap="round"/>
+    </g>
+
+    <ellipse cy="-91" rx="22" ry="18" fill="#15271c"/>
+    <ellipse cy="-93" rx="20" ry="17" fill="url(#control-yoke-boss)" stroke="#818c74" stroke-opacity=".65" stroke-width=".9"/>
+    <ellipse cy="-93" rx="13" ry="11" fill="#26392a" stroke="#b3b59b" stroke-opacity=".22" stroke-width=".75"/>
+    <path d="M-6-96h12m-10 4h8" stroke="#a3aa8d" stroke-opacity=".52" stroke-width=".9"/>
+    <g fill="#a0a38a" stroke="#253c28" stroke-width=".6"><circle cx="-13" cy="-101" r="1.9"/><circle cx="13" cy="-101" r="1.9"/><circle cx="0" cy="-80" r="1.9"/></g>
+    <path d="m-14-101 2-.5m24 .5 2-.5m-15 21h2" stroke="#344833" stroke-width=".55"/>
+    <path class="stick-focus" d="M-81-131C-88-109-86-85-70-72Q-50-54-27-64L-10-72Q0-76 10-72L27-64Q50-54 70-72C86-85 88-109 81-131"/>
+  </g>
+  <path class="stick-hit" d="M-85-135H85Q97-104 83-79Q69-56 35-57L24-34 53-21Q64-1 0-1T-53-21L-24-34-35-57Q-69-56-83-79Q-97-104-85-135Z"/>
 </g>
 
         
@@ -436,7 +528,7 @@
       <div class="heading-indicator"><span>КУРС</span><output id="flight-heading">000° · С</output><span id="flight-sector" class="heading-sector">НЕБЕСНЫЕ ГОРОДА</span></div>
     </div>
     <footer class="flight-strip">
-      <span class="interaction-hint"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 14 7-7m-7 0v7h7M4 4h12v12"/></svg> Ручка: курс 360° <button class="level-flight-button" id="level-flight-button" type="button">Выровнять</button></span>
+      <span class="interaction-hint"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 14 7-7m-7 0v7h7M4 4h12v12"/></svg> Штурвал: курс 360° <button class="level-flight-button" id="level-flight-button" type="button">Выровнять</button></span>
       <span class="selected-stat" id="selected-stat">Состояние борта <span>· 5 узлов</span></span>
       <span class="save-status" id="save-status" role="status"><span class="live-dot"></span> Бортовой журнал сохранён</span>
     </footer>
